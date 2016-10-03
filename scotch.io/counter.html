@@ -1,0 +1,50 @@
+<!--
+                                                          :::      ::::::::
+     counter.html                                       :+:      :+:    :+:
+                                                      +:+ +:+         +:+
+     By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+
+                                                  +#+#+#+#+#+   +#+
+     Created: 2016/10/03 11:36:06 by tbouder           #+#    #+#
+     Updated: 2016/10/03 11:42:54 by tbouder          ###   ########.fr
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="build/react.js"></script>
+		<script src="build/react-dom.js"></script>
+		<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+	</head>
+	<body>
+		<div id='counter'></div>
+	</body>
+	<script type="text/babel">
+		var Counter = React.createClass(
+		{
+			ft_increment: function()
+			{
+				this.setState({count: this.state.count + 1});
+			},
+			ft_decrement: function()
+			{
+				this.setState({count: this.state.count - 1});
+			},
+			getInitialState: function ()
+			{
+				return {count: 0}
+			},
+			render: function ()
+			{
+				return (
+					<div class='counter'>
+						<h1> Count : {this.state.count}</h1>
+						<button type='button' onClick={this.ft_increment}>++</button>
+						<button type='button' onClick={this.ft_decrement}>--</button>
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<Counter/>, document.getElementById('counter'));
+	</script>
+</html>
