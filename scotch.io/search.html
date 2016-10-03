@@ -1,0 +1,83 @@
+<!--
+                                                          :::      ::::::::
+     search.html                                        :+:      :+:    :+:
+                                                      +:+ +:+         +:+
+     By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+
+                                                  +#+#+#+#+#+   +#+
+     Created: 2016/10/03 11:44:33 by tbouder           #+#    #+#
+     Updated: 2016/10/03 12:07:42 by tbouder          ###   ########.fr
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="build/react.js"></script>
+		<script src="build/react-dom.js"></script>
+		<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+	</head>
+	<body>
+		<div id='search'></div>
+	</body>
+	<script type="text/babel">
+		var	Filter = React.createClass(
+		{
+			list: function(event)
+			{
+				var updated_list = this.state.init; //Original list
+				updated_list = updated_list.filter(function(item) //On filtre
+				{
+					return item.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
+				});
+				this.setState({items: updated_list}); //On met la nouvelle liste dans items
+			},
+			getInitialState: function()
+			{
+				return {
+					init: [
+						"Red",
+						"Orange",
+						"Yellow",
+						"Green",
+						"Blue",
+						"Purple",
+						"Gray"
+					],
+					items: []
+				}
+			},
+			componentWillMount: function() //Invoked once, on both client & server before rendering occurs.
+			{
+				this.setState({items : this.state.init}) //On initialise items avec init
+			},
+			render: function()
+			{
+				return (
+					<div>
+						<input type='text' placeholder='Search' onChange={this.list}/>
+						<List items={this.state.items}/>
+					</div>
+				);
+			}
+		});
+
+		var List = React.createClass(
+		{
+			render: function()
+			{
+				return (
+					<ul>
+					{
+						this.props.items.map(function(choice)
+						{
+							return (<li key={choice}>{choice}</li>)
+						})
+					}
+					</ul>
+				)
+			}
+		});
+
+		ReactDOM.render(<Filter/>, document.getElementById('search'));
+	</script>
+</html>
