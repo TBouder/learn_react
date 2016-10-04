@@ -6,26 +6,25 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/03 23:03:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/04 20:49:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// src/components/Layout.js
-import React from 'react';
-import { Link } from 'react-router';
+import React	from 'react';
+import {Link}	from 'react-router';
 
-export default class Layout extends React.Component
+class Layout extends React.Component
 {
 	render()
 	{
 		return (
-			<div className="app-container">
+			<div>
 				<header>
 					<Link to="/">
-						<img className="logo" src="/img/logo.png"/>
+						<img src="/img/logo.png"/>
 					</Link>
 				</header>
-				<div className="app-content">{this.props.children}</div>
+				<div>{this.props.children}</div>
 				<footer>
 					<p>
 						This is a demo app to showcase universal rendering and routing with <strong>React</strong> and <strong>Express</strong>.
@@ -35,3 +34,5 @@ export default class Layout extends React.Component
 		);
 	}
 }
+
+export default Layout;
