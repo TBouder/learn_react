@@ -6,55 +6,55 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 20:48:31 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/03 23:18:48 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/04 20:51:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import path from 'path';
-import {Server} from 'http';
-import Express from 'express';
-import React from 'react';
-import {renderToString} from 'react-dom/server';
-import {match, RouterContext} from 'react-router';
-import routes from './routes';
-import NotFoundPage from './components/NotFoundPage';
+/*******************************************************************************
+** First of all, we will import all the needed modules
+*******************************************************************************/
+import path						from 'path';
+import Express					from 'express';
+import React					from 'react';
+import {renderToString}			from 'react-dom/server';
+import {match, RouterContext}	from 'react-router';
+import routes					from './routes';
+import page_not_found			from './components/page_not_found';
 
+/*******************************************************************************
+** Here is the server and the routes.
+** - app.set(name, value)		>> Used to set a value
+** - app.use(path, callback)	>> Mount a specified function
+** - app.get(path, callback)	>> Routes HTTP GET request
+** - match({routes, location}, callback)
+*******************************************************************************/
 const app = new Express();
-const server = new Server(app);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(Express.static(path.join(__dirname, 'static')));
 
-app.get('*', function(req, res)
+app.get('*', function(request, response)
 {
-	match(
-		{routes, location: req.url},
-		(err, redirectLocation, renderProps) =>
-		{
-			if (err)
-				return res.status(500).send(err.message);
+	match({routes, location: request.url}, function (err, renderProps)
+	{
+		/***********************************************************************
+		** - If we get an error, then, error 500
+		** - If the page exist, we run it, else, error 404 with te correct page
+		***********************************************************************/
+		if (err)
+			return response.status(500).send(err.message);
 
-			if (redirectLocation)
-				return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-
-			let markup;
-			if (renderProps)
-				markup = renderToString(<RouterContext {...renderProps}/>);
-			else
-			{
-				markup = renderToString(<NotFoundPage/>);
-				res.status(404);
-			}
-			return res.render('index', {markup});
-		}
-	);
+		if (renderProps)
+			var markup = renderToString(<RouterContext {...renderProps}/>);
+		else
+			var markup = renderToString(<page_not_found/>) && response.status(404);
+		return (response.render('index', {markup}));
+	});
 });
 
-// start the server
+/*******************************************************************************
+** Let's start the server
+*******************************************************************************/
 const port = process.env.PORT || 8080;
-const env = process.env.NODE_ENV || 'production'; server.listen(port, err =>
-{
-	if (err)
-		return console.error(err);
-	console.info(`Server running on http://localhost:${port} [${env}]`);
-});
+app.listen(port);
+console.log(`Server running on http://localhost:${port}`);

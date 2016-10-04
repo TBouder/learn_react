@@ -6,14 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/03 23:05:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/04 20:50:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// src/components/IndexPage.js
-import React from 'react';
+import React	from 'react';
 
-export default class IndexPage extends React.Component
+class IndexPage extends React.Component
 {
 	render()
 	{
@@ -26,3 +25,5 @@ export default class IndexPage extends React.Component
 		);
 	}
 }
+
+export default IndexPage;

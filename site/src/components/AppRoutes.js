@@ -6,15 +6,15 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:55:20 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/03 22:55:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/04 20:50:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React from 'react';
-import { Router, browserHistory } from 'react-router';
-import routes from '../routes';
+import React					from 'react';
+import {Router, browserHistory}	from 'react-router';
+import routes					from '../routes';
 
-export default class AppRoutes extends React.Component
+class AppRoutes extends React.Component
 {
 	render()
 	{
@@ -23,3 +23,5 @@ export default class AppRoutes extends React.Component
 		);
 	}
 }
+
+export default AppRoutes;
