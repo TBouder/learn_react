@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Layout.js                                          :+:      :+:    :+:   */
+/*   base.js                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 import React	from 'react';
 import {Link}	from 'react-router';
 
-class Layout extends React.Component
+class base extends React.Component
 {
 	render()
 	{
@@ -35,4 +35,4 @@ class Layout extends React.Component
 	}
 }
 
-export default Layout;
+export default base;

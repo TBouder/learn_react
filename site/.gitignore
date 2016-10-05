@@ -1,4 +1,4 @@
 dist
 node_modules
 babel_cache
-static/js/bundle.js
+bundle.js

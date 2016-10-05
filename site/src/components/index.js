@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IndexPage.js                                       :+:      :+:    :+:   */
+/*   index.js                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 import React	from 'react';
 
-export default class IndexPage extends React.Component
+export default class index extends React.Component
 {
 	render()
 	{
