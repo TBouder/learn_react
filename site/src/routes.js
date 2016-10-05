@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 11:25:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/05 12:42:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ import index				from './components/index';
 import page_not_found		from './components/page_not_found';
 
 /*******************************************************************************
+** See more infos : https://goo.gl/lKlASR
 ** - Route path=[XX] component=[YY]	>> The path XX leads to the component YY
 ** - IndexRoute						>> "Default" page
 **
@@ -26,10 +27,10 @@ import page_not_found		from './components/page_not_found';
 ** Last, we load all the pages, ending by ['*'], with means all the others
 *******************************************************************************/
 const routes = (
-  <Route path="/" component={base}>
-    <IndexRoute component={index}/>
-    <Route path="*" component={page_not_found}/>
-  </Route>
+	<Route path="/" component={base}>
+		<IndexRoute component={index}/>
+		<Route path="*" component={page_not_found}/>
+	</Route>
 );
 
 export default routes;

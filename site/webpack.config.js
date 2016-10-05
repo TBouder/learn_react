@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:37:12 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 00:46:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/05 13:24:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ module.exports =
 			test: path.join(__dirname, 'src'),
 			loader: ['babel-loader'],
 			query:{cacheDirectory: 'babel_cache'}
+		},
+		{
+			test: /\.css/,
+			loaders: ['style', 'css'],
+        	include: __dirname + '/src/static'
 		}]
 	},
 	plugins: [
