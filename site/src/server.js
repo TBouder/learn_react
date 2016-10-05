@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 20:48:31 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/04 20:51:26 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/04 23:52:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ app.get('*', function(request, response)
 		if (err)
 			return response.status(500).send(err.message);
 
+		let markup;
 		if (renderProps)
-			var markup = renderToString(<RouterContext {...renderProps}/>);
+			markup = renderToString(<RouterContext {...renderProps}/>);
 		else
-			var markup = renderToString(<page_not_found/>) && response.status(404);
+			markup = renderToString(<page_not_found/>) && response.status(404);
 		return (response.render('index', {markup}));
 	});
 });
@@ -55,6 +56,6 @@ app.get('*', function(request, response)
 /*******************************************************************************
 ** Let's start the server
 *******************************************************************************/
-const port = process.env.PORT || 8080;
+const port = 8080;
 app.listen(port);
 console.log(`Server running on http://localhost:${port}`);
