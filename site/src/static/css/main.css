@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   index.js                                           :+:      :+:    :+:   */
+/*   main.css                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 17:37:49 by tbouder          ###   ########.fr       */
+/*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
+/*   Updated: 2016/10/05 17:36:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React	from 'react';
-
-export default class index extends React.Component
+.text_center
 {
-	render()
-	{
-		return (
-			<div>
-				<div>Hello World!</div>
-			</div>
-		);
-	}
+	text-align: center;
 }
