@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 13:22:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/05 17:37:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ export default class base extends React.Component
 		return (
 			<div>
 				<header>
-					<h2 class="ui center aligned icon header">
-						<i class="circular users icon"></i>
-						Friends
+					<h2>
+						<img className="ui centered image" src="/img/logo.png" />
+						<Link to="/"><div className="text_center">React + Node_js server</div></Link>
 					</h2>
-					<Link to="/">
-						<img src="/img/logo.png"/>
-					</Link>
 				</header>
 				<div>{this.props.children}</div>
 				<footer>
