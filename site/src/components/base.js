@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base.js                                          :+:      :+:    :+:   */
+/*   base.js                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/04 20:49:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/05 13:22:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React	from 'react';
 import {Link}	from 'react-router';
 
-class base extends React.Component
+export default class base extends React.Component
 {
 	render()
 	{
 		return (
 			<div>
 				<header>
+					<h2 class="ui center aligned icon header">
+						<i class="circular users icon"></i>
+						Friends
+					</h2>
 					<Link to="/">
 						<img src="/img/logo.png"/>
 					</Link>
@@ -34,5 +38,3 @@ class base extends React.Component
 		);
 	}
 }
-
-export default base;

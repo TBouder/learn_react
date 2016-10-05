@@ -6,14 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:44:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/04 20:49:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/05 12:58:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React	from 'react';
 import {Link}	from 'react-router';
 
-class page_not_found extends React.Component
+export default class page_not_found extends React.Component
 {
 	render()
 	{
@@ -28,5 +28,3 @@ class page_not_found extends React.Component
 		);
 	}
 }
-
-export default page_not_found;
