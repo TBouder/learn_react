@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/06 14:01:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/06 14:09:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ import base					from './components/base';
 import index				from './components/index';
 import page_not_found		from './components/page_not_found';
 import count				from './components/count';
+import todo					from './components/todo';
 
 /*******************************************************************************
 ** See more infos : https://goo.gl/lKlASR
@@ -28,9 +29,10 @@ import count				from './components/count';
 ** Last, we load all the pages, ending by ['*'], with means all the others
 *******************************************************************************/
 const routes = (
-	<Route path="/" component={base} count='42'>
+	<Route path="/" component={base}>
 		<IndexRoute component={index}/>
 		<Route path="/count" component={count}/>
+		<Route path="/todo" component={todo}/>
 		<Route path="*" component={page_not_found}/>
 	</Route>
 );

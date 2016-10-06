@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 22:36:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/06 18:57:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,17 @@
 	padding-top: 2vh;
 }
 
+.padding_five
+{
+	padding-top: 5vh;
+}
+
 .padding_ten
 {
 	padding-top: 10vh;
+}
+
+.page_center
+{
+	margin: auto 0;
 }
