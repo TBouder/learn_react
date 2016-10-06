@@ -6,14 +6,12 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:37:12 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 17:06:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/06 13:54:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 const webpack = require('webpack');
 const path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 
 module.exports =
 {
@@ -21,7 +19,6 @@ module.exports =
 	output:
 	{
 		path: path.join(__dirname, 'src', 'static', 'js'),
-		// path: path.join(__dirname, 'src', 'static', 'css'),
 		filename: 'bundle.js'
 	},
 	module:
