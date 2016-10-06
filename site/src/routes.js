@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 23:06:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/06 14:01:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ import {Route, IndexRoute}	from 'react-router'
 import base					from './components/base';
 import index				from './components/index';
 import page_not_found		from './components/page_not_found';
-import hello_world			from './components/hello_world';
+import count				from './components/count';
 
 /*******************************************************************************
 ** See more infos : https://goo.gl/lKlASR
@@ -30,7 +30,7 @@ import hello_world			from './components/hello_world';
 const routes = (
 	<Route path="/" component={base} count='42'>
 		<IndexRoute component={index}/>
-		<Route path="/hello_world" component={hello_world}/>
+		<Route path="/count" component={count}/>
 		<Route path="*" component={page_not_found}/>
 	</Route>
 );
