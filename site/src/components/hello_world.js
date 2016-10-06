@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.css                                           :+:      :+:    :+:   */
+/*   hello_world.js                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 22:36:40 by tbouder          ###   ########.fr       */
+/*   Created: 2016/10/03 22:44:40 by tbouder           #+#    #+#             */
+/*   Updated: 2016/10/05 23:08:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#main
-{
-	padding-top: 2vh;
-}
+import React	from 'react';
+import {Link}	from 'react-router';
 
-.text_center
+export default class hello_world extends React.Component
 {
-	text-align: center;
-}
-
-.padding_two
-{
-	padding-top: 2vh;
-}
-
-.padding_ten
-{
-	padding-top: 10vh;
+	render()
+	{
+		return (
+			<div className="text_center padding_two">
+				<h1>Hello, world!</h1>
+				<p>
+					<Link to = "/"> Go back to the main page </Link>
+				</p>
+			</div>
+		);
+	}
 }
