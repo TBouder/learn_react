@@ -6,12 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:37:12 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/06 13:54:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/06 13:59:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 const webpack = require('webpack');
 const path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports =
 {
