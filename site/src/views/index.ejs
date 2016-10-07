@@ -5,7 +5,7 @@
      By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+
                                                   +#+#+#+#+#+   +#+
      Created: 2016/10/05 00:18:09 by tbouder           #+#    #+#
-     Updated: 2016/10/06 15:47:45 by tbouder          ###   ########.fr
+     Updated: 2016/10/07 13:58:23 by tbouder          ###   ########.fr
 -->
 
 <html>
@@ -15,6 +15,19 @@
 		<title>Node + React</title>
 		<link rel="stylesheet" type="text/css" href="css/semantic.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		
+		<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+		<script>
+		// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyD48dG8QuSSImqe4k-D61BrGAKDFGpqtd0",
+				authDomain: "todo-ca6be.firebaseapp.com",
+				databaseURL: "https://todo-ca6be.firebaseio.com",
+				storageBucket: "",
+				messagingSenderId: "573402902755"
+			};
+			firebase.initializeApp(config);
+		</script>
 	</head>
 	<body>
 		<div id="main"><%- markup -%></div>
