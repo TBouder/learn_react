@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/07 22:47:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/08 08:54:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,33 @@ import React	from 'react';
 import {Link}	from 'react-router';
 import Firebase from 'firebase';
 
+function Add_card(props)
+{
+	let	id = props.uniqueid;
+	let	desc = props.description;
+	let THIS = props.dest_this;
+
+	let id_O = props.uniqueid + "_main";
+
+	return (
+		<div className="card" id={id_O} key={id_0}>
+			<div className="content">
+				<div className="header">Todo number {id}</div>
+				<div className="description">{desc}</div>
+			</div>
+			<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, id)} id={id}>
+				<i className="checkmark icon"></i> Done
+			</div>
+			</div>
+	);
+}
+
 export default class todo extends React.Component
 {
 	constructor()
 	{
 		super();
-		this.state = {todo: 0, comps: [], buffer: 0, value: ""};
+		this.state = {todo: 0, comps: [], uniqueid: 0, value: ""};
 		this.ft_add_task = this.ft_add_task.bind(this);
 		this.ft_del_task = this.ft_del_task.bind(this);
 		this.ft_change_text = this.ft_change_text.bind(this);
@@ -28,44 +49,29 @@ export default class todo extends React.Component
 		/*Load todo from database*/
 		this.ft_load();
 
-		var THIS = this;
-		var database = firebase.database().ref("todo_list");
+		/*Load nb_elem*/
+		// var THIS = this;
+		// firebase.database().ref("todo_list").on("value", function (snapshot)
+		// {
+		// 	var	nb_elem = snapshot.numChildren();
+		// 	THIS.setState({todo: nb_elem, uniqueid: nb_elem});
+		// });
 
-		database.on("value", function (snapshot)
-		{
-			var	nb_elem = snapshot.numChildren();
-			THIS.setState({todo: nb_elem, buffer: nb_elem});
-		});
 
 	}
 
 	ft_add_task()
 	{
-		let id = this.state.buffer;
+		console.log("LAUNCH ft_add_task");
+		let id = this.state.uniqueid;
 		let text = this.state.value;
 		if (text == "")
 			return;
 		/*******************/
-		var database = firebase.database();
-		firebase.database().ref('/todo_list/' + id).set(
-		{
-			text: {text}
-		});
+		firebase.database().ref('/todo_list/' + id).set({text: {text}});
 		/******************/
-		this.state.comps.push(
-			<div className="card" key={id} id={id}>
-				<div className="content">
-					<div className="header">Todo number {id}</div>
-					<div className="description">{this.state.value}</div>
-				</div>
-					<div className="ui bottom attached button green" onClick={this.ft_del_task.bind(this, id)} id={id}>
-						<i className="checkmark icon"></i>
-						Done
-					</div>
-			</div>
-		);
-		this.setState({todo: this.state.todo + 1, buffer: id + 1});
-		this.setState({value: ""});
+		this.state.comps.push(<Add_card key={this.state.uniqueid} uniqueid={this.state.uniqueid} description={this.state.value} dest_this={this}/>);
+		this.setState({todo: this.state.todo + 1, uniqueid: id + 1, value: ""});
 	}
 
 	ft_add_task_enter(e)
@@ -77,10 +83,7 @@ export default class todo extends React.Component
 	ft_del_task(id)
 	{
 		delete this.state.comps[id];
-
-		var database = firebase.database();
-		var ref = database.ref("todo_list/" + id);
-		ref.remove();
+		firebase.database().ref("todo_list/" + id).remove();
 		this.setState({todo: this.state.todo - 1});
 	}
 
@@ -91,12 +94,15 @@ export default class todo extends React.Component
 
 	ft_load()
 	{
+		console.log("LAUNCH FT_LOAD");
 		var THIS = this;
 		var datas = [];
 		var database = firebase.database();
 		var ref = database.ref("todo_list").orderByKey();
 
-		ref.on("value", function (snapshot)
+		//FACT IS : comme on met tout ce qui est dans DB, on met 2 fois les trucs qu'on ajoute : 1 fois sur le site + 1 fois en DB
+
+		ref.once("value", function (snapshot)
 		{
 			snapshot.forEach(function(childSnapshot)
 			{
@@ -104,26 +110,14 @@ export default class todo extends React.Component
 				let text = childSnapshot.val().text.text;
 				datas[key] = text;
 			});
-			datas.forEach(logArrayElements, THIS);
+			datas.forEach(logArrayElements);
 		});
 
 		function logArrayElements(element, index, array)
 		{
-			let id = index;
-			let text = element;
-			THIS.state.comps.push(
-				<div className="card" key={id} id={id}>
-					<div className="content">
-						<div className="header">Todo number {id}</div>
-						<div className="description">{text}</div>
-					</div>
-						<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, id)} id={id}>
-							<i className="checkmark icon"></i>
-							Done
-						</div>
-				</div>
-			);
-			// this.setState({todo: THIS.state.todo + 1, buffer: THIS.state.buffer + 1});
+			let key = index + "_key";
+			THIS.state.comps.push(<Add_card uniqueid={index} description={element} dest_this={THIS}/>);
+			THIS.setState({todo: THIS.state.todo + 1, uniqueid: THIS.state.uniqueid + 1});
 		}
 	}
 
