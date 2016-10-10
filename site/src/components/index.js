@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/06 14:04:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/10 12:21:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ export default class index extends React.Component
 						<button className="ui labeled icon button">
 							<i className="remove icon"></i>
 							Let's go to an error 404 page
+						</button>
+					</Link>
+					<Link to = "/todo">
+						<button className="ui labeled icon button">
+							<i className="Checked Calendar icon"></i>
+							Let's go the todo list
 						</button>
 					</Link>
 				</div>
