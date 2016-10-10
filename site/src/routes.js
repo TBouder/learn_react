@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/06 14:09:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/10 14:08:51 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ import index				from './components/index';
 import page_not_found		from './components/page_not_found';
 import count				from './components/count';
 import todo					from './components/todo';
+import account			from './components/account';
 
 /*******************************************************************************
 ** See more infos : https://goo.gl/lKlASR
@@ -32,6 +33,7 @@ const routes = (
 	<Route path="/" component={base}>
 		<IndexRoute component={index}/>
 		<Route path="/count" component={count}/>
+		<Route path="/account" component={account}/>
 		<Route path="/todo" component={todo}/>
 		<Route path="*" component={page_not_found}/>
 	</Route>

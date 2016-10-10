@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/06 18:59:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/10 16:09:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ export default class base extends React.Component
 			<div>
 				<header>
 					<img className="ui centered image padding_two" src="/img/logo.png" />
-					<Link to="/"><h2 className="text_center">React + Node_js server</h2></Link>
+					<Link to="/"><h2 className="text_center">React + Node_js : server side</h2></Link>
 				</header>
 
 				<div>{this.props.children}</div>

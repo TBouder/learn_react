@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/09 23:49:48 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/10 15:35:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,43 @@ export default class todo extends React.Component
 		this.ft_change_text = this.ft_change_text.bind(this);
 		this.ft_load = this.ft_load.bind(this);
 
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		    console.log(user.displayName);
+		  } else {
+			console.log("notUSER");
+		  }
+		});
+
 		/*Load todo from database*/
 		this.ft_load();
 	}
 
-	ft_add_card(THIS, uniqueid, description)
+	ft_add_card(THIS, uniqueid, description, date)
 	{
+		function timeSince(date)
+		{
+			var seconds = Math.floor((new Date() - date) / 1000);
+			var interval;
+
+			if ((interval = Math.floor(seconds / 31536000)) > 1)
+				return (interval + " years ago");
+			if ((interval = Math.floor(seconds / 2592000)) > 1)
+				return (interval + " months ago");
+			if ((interval = Math.floor(seconds / 86400)) > 1)
+				return (interval + " days ago");
+			if ((interval = Math.floor(seconds / 3600)) > 1)
+				return (interval + " hours ago");
+			if ((interval = Math.floor(seconds / 60)) > 1)
+				return (interval + " minutes ago");
+			return (Math.floor(seconds) + " seconds ago");
+		}
+
+		var new_date = timeSince(date);
 		return (
 			<div className="card" key={uniqueid}>
 				<div className="content">
-					<div className="header">Todo number {uniqueid}</div>
+  					<div className="right floated meta">{new_date}</div>
 					<div className="description">{description}</div>
 				</div>
 				<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, uniqueid)}>
@@ -57,7 +84,7 @@ export default class todo extends React.Component
 				if (new_unique_id == key)
 					new_unique_id++;
 			});
-			THIS.setState({todo: THIS.state.todo + 1, uniqueid: new_unique_id, value: ""});
+			THIS.setState({uniqueid: new_unique_id, value: ""});
 		});
 	}
 
@@ -66,9 +93,11 @@ export default class todo extends React.Component
 	{
 		if (this.state.value != "")
 		{
-			firebase.database().ref('/todo_list/' + this.state.uniqueid).set({text: this.state.value});
-			this.state.todo_array.push(this.ft_add_card(this, this.state.uniqueid, this.state.value));
+			var date = Date.now();
+			firebase.database().ref('/todo_list/' + this.state.uniqueid).set({text: this.state.value, time: date});
+			this.state.todo_array.unshift(this.ft_add_card(this, this.state.uniqueid, this.state.value, date));
 			this.ft_find_available(this);
+			this.setState({todo: this.state.todo + 1});
 		}
 	}
 
@@ -111,20 +140,22 @@ export default class todo extends React.Component
 		var THIS = this;
 		var	new_unique_id = 0;
 		var datas = [];
+		var	i = 0;
 
-		firebase.database().ref("todo_list").orderByKey().once("value", function (snapshot)
+		firebase.database().ref("todo_list").orderByChild("time").once("value", function (snapshot)
 		{
 			snapshot.forEach(function(childSnapshot)
 			{
 				let key = childSnapshot.key;
 				let text = childSnapshot.val().text;
+				let time = childSnapshot.val().time;
 				if (new_unique_id == key)
 					new_unique_id++;
-				datas[key] = text;
+				datas[i++] = [key, text, time];
 			});
 			datas.forEach(function(element, index, array)
 			{
-				THIS.state.todo_array.push(THIS.ft_add_card(THIS, index, element));
+				THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, element[0], element[1], element[2]));
 				THIS.setState({todo: THIS.state.todo + 1});
 			});
 			THIS.setState({uniqueid: new_unique_id});
