@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/10 15:35:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/12 13:14:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ export default class todo extends React.Component
 		this.ft_del_task = this.ft_del_task.bind(this);
 		this.ft_change_text = this.ft_change_text.bind(this);
 		this.ft_load = this.ft_load.bind(this);
-
-		firebase.auth().onAuthStateChanged(function(user) {
-		  if (user) {
-		    console.log(user.displayName);
-		  } else {
-			console.log("notUSER");
-		  }
-		});
 
 		/*Load todo from database*/
 		this.ft_load();

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 20:48:31 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/07 14:03:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/11 14:22:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ app.get('*', function(request, response)
 /*******************************************************************************
 ** Let's start the server
 *******************************************************************************/
-const port = 8080;
+const port = 8888;
 app.listen(port);
 console.log(`Server running on http://localhost:${port}`);
