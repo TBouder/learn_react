@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/12 16:11:05 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/13 11:56:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ import index				from './components/index';
 import page_not_found		from './components/page_not_found';
 import count				from './components/count';
 import todo					from './components/todo';
-import login				from './components/login';
 import account				from './components/account';
 
 /*******************************************************************************
