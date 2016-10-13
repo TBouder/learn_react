@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   login.js                                           :+:      :+:    :+:   */
+/*   Login_page.js                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/12 15:55:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/13 12:00:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ import React	from 'react';
 import {Link}	from 'react-router';
 import Firebase from 'firebase';
 
-export default class login extends React.Component
+export default class Login_page extends React.Component
 {
 	constructor()
 	{
