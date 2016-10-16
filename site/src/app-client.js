@@ -6,13 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:56:12 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/05 23:38:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/14 12:53:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React		from 'react';
 import ReactDOM		from 'react-dom';
 import AppRoutes	from './components/AppRoutes';
+
 
 window.onload = function()
 {

@@ -6,14 +6,9 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/13 12:53:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/14 12:55:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#main
-{
-	padding-top: 2vh;
-}
 
 .text_center
 {
@@ -43,4 +38,39 @@
 .user_img
 {
 	padding: 2vh 2vw;
+}
+
+.not_display
+{
+	display: none !important;
+}
+
+.full_width
+{
+	width: 100% !important;
+	border-radius: 0 !important;
+}
+
+/* Animation */
+@-webkit-keyframes fadeIn	{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@-moz-keyframes fadeIn		{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@keyframes fadeIn			{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+
+.fade-in {
+	opacity:0;  /* make things invisible upon start */
+	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+
+	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+
+	-webkit-animation-duration:1s;
+	-moz-animation-duration:1s;
+	animation-duration:1s;
+
+	-webkit-animation-delay: 0s;
+	-moz-animation-delay: 0s;
+	animation-delay: 0s;
 }
