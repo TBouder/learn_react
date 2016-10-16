@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 20:48:31 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/11 14:22:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/16 14:51:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ import React					from 'react';
 import {renderToString}			from 'react-dom/server';
 import {match, RouterContext}	from 'react-router';
 import routes					from './routes';
-import page_not_found			from './components/page_not_found';
+import Page_not_found			from './components/Page_not_found';
 
 /*******************************************************************************
 ** Here is the server and the routes.

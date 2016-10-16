@@ -6,18 +6,18 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/13 11:56:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/16 14:50:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React				from 'react'
 import {Route, IndexRoute}	from 'react-router'
-import base					from './components/base';
-import index				from './components/index';
-import page_not_found		from './components/page_not_found';
-import count				from './components/count';
-import todo					from './components/todo';
-import account				from './components/account';
+import Base					from './components/Base';
+import Index				from './components/Index';
+import Page_not_found		from './components/Page_not_found';
+import Count				from './components/Count';
+import Todo					from './components/Todo';
+import Account				from './components/Account';
 
 /*******************************************************************************
 ** See more infos : https://goo.gl/lKlASR
@@ -30,12 +30,12 @@ import account				from './components/account';
 ** Last, we load all the pages, ending by ['*'], with means all the others
 *******************************************************************************/
 const routes = (
-	<Route path="/" component={base}>
-		<IndexRoute component={index}/>
-		<Route path="/count" component={count}/>
-		<Route path="/account" component={account}/>
-		<Route path="/todo" component={todo}/>
-		<Route path="*" component={page_not_found}/>
+	<Route path="/" component={Base}>
+		<IndexRoute component={Index}/>
+		<Route path="/count" component={Count}/>
+		<Route path="/account" component={Account}/>
+		<Route path="/todo" component={Todo}/>
+		<Route path="*" component={Page_not_found}/>
 	</Route>
 );
 

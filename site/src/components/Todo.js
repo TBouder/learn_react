@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/12 13:14:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/16 14:50:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ import React	from 'react';
 import {Link}	from 'react-router';
 import Firebase from 'firebase';
 
-export default class todo extends React.Component
+export default class Todo extends React.Component
 {
 	constructor()
 	{
@@ -51,7 +51,7 @@ export default class todo extends React.Component
 
 		var new_date = timeSince(date);
 		return (
-			<div className="card" key={uniqueid}>
+			<div className="card fade-in" key={uniqueid}>
 				<div className="content">
   					<div className="right floated meta">{new_date}</div>
 					<div className="description">{description}</div>
