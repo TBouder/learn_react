@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 14:41:51 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/16 15:03:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ export default class Login_page extends React.Component
 
 	ft_change_login(event)	{this.setState({login: event.target.value});}
 	ft_change_passwd(event)	{this.setState({passwd: event.target.value});}
+	ft_catch_enter(e)		{e.charCode == 13 || e.keyCode == 13 ? this.ft_send_login() : false;}
+	
 	ft_send_login()
 	{
 		const auth = firebase.auth();
@@ -78,11 +80,6 @@ export default class Login_page extends React.Component
 		});
 	}
 
-	ft_catch_enter(e, func)
-	{
-		if (e.charCode == 13 || e.keyCode == 13)
-			{this.ft_send_login()};
-	}
 
 	render()
 	{

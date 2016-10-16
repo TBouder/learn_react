@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/15 22:22:49 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/16 15:40:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,35 @@ export default class User_page extends React.Component
 		var THIS = this;
 		String.prototype.capitalizeFirstLetter = function() {return this.charAt(0).toUpperCase() + this.slice(1);}
 
-		var user = firebase.auth().currentUser;
-		if (user)
-		{
-			this.state =
-			{
-				login: user.email,
-				email: user.email,
-				email_verif: user.emailVerified,
-				photo: user.photoURL,
-				uid: user.uid,
-				photo_display_form: 0,
-				photo_url_addr: ""
-			};
-		}
+		const DB = firebase.database();
+		const REF = DB.ref("/users/");
+		const USER = firebase.auth().currentUser;
 
+		// firebase.database().ref("todo_list").orderByChild("time").once("value", function (snapshot)
+
+		// firebase.database().ref("/users/").once("value", function (snapshot)
+
+		firebase.database().ref("/users/")
+		.orderByChild("email")
+		.equalTo(USER.email).once("value", function (snapshot)
+		{
+			var user = snapshot.val();
+			console.log(user);
+			console.log(Object.keys(user));
+			if (user)
+			{
+				THIS.state =
+				{
+					login: user.login,
+					email: user.email,
+					email_verif: USER.emailVerified,
+					photo: USER.photoURL,
+					uid: USER.uid,
+					photo_display_form: 0,
+					photo_url_addr: ""
+				};
+			}
+		});
 
 		this.ft_open_photo_form = this.ft_open_photo_form.bind(this);
 		this.ft_change_text = this.ft_change_text.bind(this);
