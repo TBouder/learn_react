@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 19:12:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/16 19:17:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,40 +35,23 @@ export default class User_page extends React.Component
 		{
 			snapshot.forEach(function(childSnapshot)
 			{
-				let key = childSnapshot.key;
+				var key = childSnapshot.key;
+				var user_login = childSnapshot.val().login;
+				var user_email = childSnapshot.val().email;
 				console.log(key);
-			});
-			var user = snapshot.val();
-			// var test = 'tbouder';
-			// console.log(snapshot.getKey());
-			// console.log(snapshot.getChildren());
-			// console.log(snapshot.getValue());
-			// console.log(snapshot.val().tbouder);
-
-			// console.log(Object.keys(user));
-			//
-			// var user_list = snapshot.val();
-			// var user_name = String(Object.keys(user_list));
-			// console.log(user_list);
-			// console.log(user_name);
-			//
-			// console.log(user_list.user_name);
-			// console.log(user_list "tbouder");
-
-
-			if (user)
-			{
+				console.log(user_login);
+				console.log(user_email);
 				THIS.state =
 				{
-					login: user.login,
-					email: user.email,
+					login: user_login,
+					email: user_email,
 					email_verif: USER.emailVerified,
 					photo: USER.photoURL,
 					uid: USER.uid,
 					photo_display_form: 0,
 					photo_url_addr: ""
 				};
-			}
+			});
 		});
 
 		this.ft_open_photo_form = this.ft_open_photo_form.bind(this);
