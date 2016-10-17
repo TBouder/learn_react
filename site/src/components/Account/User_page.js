@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 19:17:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/10/17 11:10:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,26 @@ export default class User_page extends React.Component
 		const REF = DB.ref("/users/");
 		const USER = firebase.auth().currentUser;
 
-		// firebase.database().ref("todo_list").orderByChild("time").once("value", function (snapshot)
+		this.state =
+		{
+			login: USER.displayName,
+			email: USER.email,
+			email_verif: USER.emailVerified,
+			photo: USER.photoURL,
+			uid: USER.uid,
+			photo_display_form: 0,
+			photo_url_addr: ""
+		};
 
-		// firebase.database().ref("/users/").once("value", function (snapshot)
-
-		firebase.database().ref("/users/")
-		.orderByChild("email")
-		.equalTo(USER.email).once("value", function (snapshot)
+		firebase.database().ref("/users/").orderByChild("email").equalTo(USER.email).once("value", function (snapshot)
 		{
 			snapshot.forEach(function(childSnapshot)
 			{
-				var key = childSnapshot.key;
-				var user_login = childSnapshot.val().login;
+				var user_login = childSnapshot.val().login.capitalizeFirstLetter();
 				var user_email = childSnapshot.val().email;
-				console.log(key);
-				console.log(user_login);
-				console.log(user_email);
-				THIS.state =
-				{
-					login: user_login,
-					email: user_email,
-					email_verif: USER.emailVerified,
-					photo: USER.photoURL,
-					uid: USER.uid,
-					photo_display_form: 0,
-					photo_url_addr: ""
-				};
+				THIS.setState({login: user_login, email: user_email});
 			});
 		});
-
 		this.ft_open_photo_form = this.ft_open_photo_form.bind(this);
 		this.ft_change_text = this.ft_change_text.bind(this);
 		this.ft_select_new_photo = this.ft_select_new_photo.bind(this);
@@ -102,7 +93,11 @@ export default class User_page extends React.Component
 								<button className="ui button" onClick={this.ft_open_photo_form}>Change photo</button>
 								<button className="ui button">Or not ?</button>
 
+								<div className={this.state.photo_display_form == 1 ? "" : "not_display"}>
+									<br/>
+								</div>
 								<div className={this.state.photo_display_form == 1 ? "ui fluid input" : "ui fluid input not_display"}>
+									<br/>
 									<input type="text" value={this.state.photo_url_addr} placeholder="Link to your photo" onChange={this.ft_change_text} onKeyPress={this.ft_select_new_photo.bind(this)}/>
 								</div>
 							</div>
