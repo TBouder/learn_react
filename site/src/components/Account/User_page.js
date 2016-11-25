@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/17 11:10:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/26 00:47:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ export default class User_page extends React.Component
 								</div>
 								<div className={this.state.photo_display_form == 1 ? "ui fluid input" : "ui fluid input not_display"}>
 									<br/>
-									<input type="text" value={this.state.photo_url_addr} placeholder="Link to your photo" onChange={this.ft_change_text} onKeyPress={this.ft_select_new_photo.bind(this)}/>
+									<div>
+										<input type="text" value={this.state.photo_url_addr} placeholder="Link to your photo" onChange={this.ft_change_text} onKeyPress={this.ft_select_new_photo.bind(this)}/>
+									</div>
+									<div className="ui teal label">Press enter to submit !</div>
 								</div>
 							</div>
 						</div>

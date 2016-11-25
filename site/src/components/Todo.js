@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   todo.js                                            :+:      :+:    :+:   */
+/*   Todo.js                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 14:50:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/26 00:49:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,29 @@ export default class Todo extends React.Component
 	constructor()
 	{
 		super();
-		this.state = {todo: 0, todo_array: [], uniqueid: 0, value: ""};
+		var THIS = this;
+		String.prototype.capitalizeFirstLetter = function() {return this.charAt(0).toUpperCase() + this.slice(1);}
+
+		const DB = firebase.database();
+		const REF = DB.ref("/users/");
+		const USER = firebase.auth().currentUser;
+		this.state =
+		{
+			login: USER.displayName, // CAUSE UNE ERROR SI NULL
+			todo: 0,
+			todo_array: [],
+			uniqueid: 0,
+			value: ""
+		};
+		firebase.database().ref("/users/").orderByChild("email").equalTo(USER.email).once("value", function (snapshot)
+		{
+			snapshot.forEach(function(childSnapshot)
+			{
+				var user_login = childSnapshot.val().login.capitalizeFirstLetter();
+				THIS.setState({login: user_login});
+			});
+		});
+
 		this.ft_add_task = this.ft_add_task.bind(this);
 		this.ft_del_task = this.ft_del_task.bind(this);
 		this.ft_change_text = this.ft_change_text.bind(this);
