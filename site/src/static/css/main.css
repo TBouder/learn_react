@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/17 11:07:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/26 00:26:48 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@
 {
 	width: 100% !important;
 	border-radius: 0 !important;
+}
+
+.half_height
+{
+	height: 50% !important;
 }
 
 /* Animation */
