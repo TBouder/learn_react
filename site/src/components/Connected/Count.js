@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count.js                                           :+:      :+:    :+:   */
+/*   Count.js                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/06 14:04:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/27 22:47:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React	from 'react';
 import {Link}	from 'react-router';
 
-export default class count extends React.Component
+export default class Count extends React.Component
 {
 	constructor()
 	{

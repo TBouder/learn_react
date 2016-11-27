@@ -6,13 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/26 00:49:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/27 22:46:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React	from 'react';
-import {Link}	from 'react-router';
-import Firebase from 'firebase';
+import React			from 'react';
+import {Link}			from 'react-router';
+import Firebase 		from 'firebase';
+import Create_account	from '../Account/Create_account';
 
 export default class Todo extends React.Component
 {
@@ -27,31 +28,38 @@ export default class Todo extends React.Component
 		const USER = firebase.auth().currentUser;
 		this.state =
 		{
-			login: USER.displayName, // CAUSE UNE ERROR SI NULL
+			login: "",
+			image: "",
 			todo: 0,
 			todo_array: [],
 			uniqueid: 0,
-			value: ""
+			value: "",
+			tag_value: ""
 		};
-		firebase.database().ref("/users/").orderByChild("email").equalTo(USER.email).once("value", function (snapshot)
-		{
-			snapshot.forEach(function(childSnapshot)
-			{
-				var user_login = childSnapshot.val().login.capitalizeFirstLetter();
-				THIS.setState({login: user_login});
-			});
-		});
 
 		this.ft_add_task = this.ft_add_task.bind(this);
 		this.ft_del_task = this.ft_del_task.bind(this);
-		this.ft_change_text = this.ft_change_text.bind(this);
+		this.ft_change_value = this.ft_change_value.bind(this);
+		this.ft_change_tag_value = this.ft_change_tag_value.bind(this);
 		this.ft_load = this.ft_load.bind(this);
 
 		/*Load todo from database*/
+		firebase.auth().onAuthStateChanged(function(user)
+		{
+			if (user)
+				THIS.setState({login: user.displayName, image: user.photoURL});
+			else
+				render()
+				{
+					return (<div>{<Create_account/>}</div>)
+				}
+			//ELSE IF NO USER -> REDIRECT LOGIN
+		});
+
 		this.ft_load();
 	}
 
-	ft_add_card(THIS, uniqueid, description, date)
+	ft_add_card(THIS, uniqueid, description, date, tag, username, image)
 	{
 		function timeSince(date)
 		{
@@ -73,11 +81,21 @@ export default class Todo extends React.Component
 
 		var new_date = timeSince(date);
 		return (
-			<div className="card fade-in" key={uniqueid}>
+			<div className="ui card fade-in segment" key={uniqueid}>
 				<div className="content">
-  					<div className="right floated meta">{new_date}</div>
+					<div className="right floated right_data">
+						<div className="meta">{new_date}</div>
+						<div className="meta">{tag}</div>
+					</div>
+					<div className="left floated">
+						<img className="ui avatar image" src={image}/> {username}
+					</div>
+			    </div>
+
+				<div className="content">
 					<div className="description">{description}</div>
 				</div>
+
 				<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, uniqueid)}>
 					<i className="checkmark icon"></i> Done
 				</div>
@@ -98,7 +116,7 @@ export default class Todo extends React.Component
 				if (new_unique_id == key)
 					new_unique_id++;
 			});
-			THIS.setState({uniqueid: new_unique_id, value: ""});
+			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: ""});
 		});
 	}
 
@@ -108,8 +126,11 @@ export default class Todo extends React.Component
 		if (this.state.value != "")
 		{
 			var date = Date.now();
-			firebase.database().ref('/todo_list/' + this.state.uniqueid).set({text: this.state.value, time: date});
-			this.state.todo_array.unshift(this.ft_add_card(this, this.state.uniqueid, this.state.value, date));
+			var tag = this.state.tag_value;
+			var login = this.state.login;
+			var image = this.state.image;
+			firebase.database().ref('/todo_list/' + this.state.uniqueid).set({text: this.state.value, time: date, tag: tag, user: login, image: image});
+			this.state.todo_array.unshift(this.ft_add_card(this, this.state.uniqueid, this.state.value, date, tag, login, image));
 			this.ft_find_available(this);
 			this.setState({todo: this.state.todo + 1});
 		}
@@ -143,10 +164,8 @@ export default class Todo extends React.Component
 	}
 
 	/*This function changes the value of the text to be save*/
-	ft_change_text(event)
-	{
-		this.setState({value: event.target.value});
-	}
+	ft_change_value(event)		{ this.setState({value: event.target.value}); }
+	ft_change_tag_value(event)	{this.setState({tag_value: event.target.value}); }
 
 	/*This function loads the database on the page*/
 	ft_load()
@@ -163,13 +182,16 @@ export default class Todo extends React.Component
 				let key = childSnapshot.key;
 				let text = childSnapshot.val().text;
 				let time = childSnapshot.val().time;
+				let tag = childSnapshot.val().tag;
+				let user = childSnapshot.val().user;
+				let image = childSnapshot.val().image;
 				if (new_unique_id == key)
 					new_unique_id++;
-				datas[i++] = [key, text, time];
+				datas[i++] = [key, text, time, tag, user, image];
 			});
 			datas.forEach(function(element, index, array)
 			{
-				THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, element[0], element[1], element[2]));
+				THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, element[0], element[1], element[2], element[3], element[4], element[5]));
 				THIS.setState({todo: THIS.state.todo + 1});
 			});
 			THIS.setState({uniqueid: new_unique_id});
@@ -187,7 +209,19 @@ export default class Todo extends React.Component
 								<div className="header">You have {this.state.todo} todo to do</div>
 								<div className="description">
 									<div className="ui fluid input">
-										<input type="text" value={this.state.value} placeholder="What do you want todododo ?" onChange={this.ft_change_text} onKeyPress={this.ft_add_task_enter.bind(this)}/>
+										<input type="text" value={this.state.value} placeholder="What do you want todododo ?" onChange={this.ft_change_value} onKeyPress={this.ft_add_task_enter.bind(this)}/>
+									</div>
+									<div className="ui fluid input">
+										<select name="tags" multiple="" className="ui fluid dropdown" value={this.state.tag_value} onChange={this.ft_change_tag_value} onKeyPress={this.ft_add_task_enter.bind(this)}>
+											<option value="">Select your tag !</option>
+											<option value="#Fun">Fun</option>
+											<option value="#Cool">Cool</option>
+											<option value="#Game">Game</option>
+											<option value="#Love">Love</option>
+											<option value="#Mars">Mars</option>
+											<option value="#Space">Space</option>
+											<option value="#URGENT">URGENT</option>
+										</select>
 									</div>
 								</div>
 							</div>

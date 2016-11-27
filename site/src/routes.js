@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 14:50:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/27 22:48:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@ import {Route, IndexRoute}	from 'react-router'
 import Base					from './components/Base';
 import Index				from './components/Index';
 import Page_not_found		from './components/Page_not_found';
-import Count				from './components/Count';
-import Todo					from './components/Todo';
+import Connected			from './components/Connected';
 import Account				from './components/Account';
 
 /*******************************************************************************
@@ -32,9 +31,9 @@ import Account				from './components/Account';
 const routes = (
 	<Route path="/" component={Base}>
 		<IndexRoute component={Index}/>
-		<Route path="/count" component={Count}/>
 		<Route path="/account" component={Account}/>
-		<Route path="/todo" component={Todo}/>
+		<Route path="/count" component={Connected}/>
+		<Route path="/todo" component={Connected}/>
 		<Route path="*" component={Page_not_found}/>
 	</Route>
 );

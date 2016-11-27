@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base.js                                            :+:      :+:    :+:   */
+/*   Base.js                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 14:49:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/27 23:33:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React	from 'react';
 import {Link}	from 'react-router';
 import Firebase from 'firebase';
+import {Route, IndexRoute}	from 'react-router'
 
 export default class Base extends React.Component
 {
-	constructor()
+	constructor(props)
 	{
-		super();
+		super(props);
 		var THIS = this;
 		this.state = {currentUser: firebase.auth().currentUser, logged_in: 0};
 
@@ -47,10 +48,9 @@ export default class Base extends React.Component
 				<header>
 					<div className="ui inverted segment full_width">
 						<div className="ui inverted secondary pointing menu">
-							<Link to="/"><span className="active item">Home</span></Link>
-							<Link to="/count"><span className="item">Counter</span></Link>
-							<Link to="/todo"><span className="item">Todo-list</span></Link>
-							<Link to="/404page"><span className="item">404</span></Link>
+							<Link to="/"><span className={this.props.location.pathname == "/" ? "active item" : "item"}>Home</span></Link>
+							<Link to="/count"><span className={this.props.location.pathname == "/count" ? "active item" : "item"}>Counter</span></Link>
+							<Link to="/todo"><span className={this.props.location.pathname == "/todo" ? "active item" : "item"}>Todo-list</span></Link>
 
 						{
 							this.state.user == null && this.state.logged_in == 0

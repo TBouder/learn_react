@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/26 00:26:48 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/27 22:42:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,35 @@
 .half_height
 {
 	height: 50% !important;
+}
+
+.label_main
+{
+	margin-bottom: 10%;
+}
+
+.label_left
+{
+	position: absolute !important;
+	width: 40% !important;
+	left: 5px !important;
+}
+
+.label_right
+{
+	position: absolute !important;
+	width: 40% !important;
+	right: 5px !important;
+}
+
+.right_data
+{
+	margin-top: -3%;
+}
+
+body
+{
+	background-color: grey;
 }
 
 /* Animation */
