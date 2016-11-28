@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 02:07:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 12:10:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ export default class Base extends React.Component
 		function night_theme()
 		{
 			var n = new Date().getHours();
-			if (n <= 8 || n >= 22)
+			// if (n <= 8 || n >= 22)
 				document.body.style.backgroundColor = "#263248";
 		}
 		/*Switch to night mode by night*/
