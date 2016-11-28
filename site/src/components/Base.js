@@ -6,14 +6,16 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/27 23:33:53 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 02:07:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React	from 'react';
-import {Link}	from 'react-router';
-import Firebase from 'firebase';
+import React				from 'react';
+import {Link}				from 'react-router';
+import Firebase				from 'firebase';
 import {Route, IndexRoute}	from 'react-router'
+import Is_connected			from './Navbar/Is_connected';
+import Is_not_connected		from './Navbar/Is_not_connected';
 
 export default class Base extends React.Component
 {
@@ -21,23 +23,33 @@ export default class Base extends React.Component
 	{
 		super(props);
 		var THIS = this;
-		this.state = {currentUser: firebase.auth().currentUser, logged_in: 0};
+		this.state = {compo: "", currentUser: "", logged_in: 0};
+		this.componentWillReceiveProps(this.props);
 
 		firebase.auth().onAuthStateChanged(function(user)
 		{
 			if (user)
-				THIS.setState({logged_in: 1})
+				THIS.setState({logged_in: 1, currentUser: user})
 		});
-		this.ft_logout = this.ft_logout.bind(this);
+		function night_theme()
+		{
+			var n = new Date().getHours();
+			if (n <= 8 || n >= 22)
+				document.body.style.backgroundColor = "#263248";
+		}
+		/*Switch to night mode by night*/
+		night_theme();
 	}
 
-	ft_logout()
+	componentWillReceiveProps(nextProps)
 	{
 		var THIS = this;
-		firebase.auth().signOut().then(function()
+		firebase.auth().onAuthStateChanged(function(user)
 		{
-			THIS.setState({logged_in: 0});
-			THIS.setState({currentUser: null});
+			if (user)
+				THIS.setState({compo: <Is_connected user={user}/>});
+			else
+				THIS.setState({compo: <Is_not_connected/>});
 		});
 	}
 
@@ -48,41 +60,14 @@ export default class Base extends React.Component
 				<header>
 					<div className="ui inverted segment full_width">
 						<div className="ui inverted secondary pointing menu">
+							<h4 className="item">Hello {this.state.currentUser.displayName} !</h4>
 							<Link to="/"><span className={this.props.location.pathname == "/" ? "active item" : "item"}>Home</span></Link>
 							<Link to="/count"><span className={this.props.location.pathname == "/count" ? "active item" : "item"}>Counter</span></Link>
 							<Link to="/todo"><span className={this.props.location.pathname == "/todo" ? "active item" : "item"}>Todo-list</span></Link>
 
-						{
-							this.state.user == null && this.state.logged_in == 0
-							?
-							<div className="right menu">
-								<Link to={{pathname: "/account", query: {page: "sign_up" }}}>
-									<button className="ui icon teal button">
-										<h5>Sign Up</h5>
-									</button>
-								</Link>
-								<Link to="/account">
-									<button className="ui icon green button">
-										<h5>Sign In</h5>
-									</button>
-								</Link>
-							</div>
-							:
-							<div className="right menu">
-								<Link to="/account">
-									<button className="ui icon teal button">
-										<h5>Account</h5>
-									</button>
-								</Link>
-
-								<button className="ui icon red button" onClick={this.ft_logout}>
-									<h5><i className="icon power"></i></h5>
-								</button>
-							</div>
-						}
+							{this.state.compo}
 						</div>
 					</div>
-
 				</header>
 
 				<div>{this.props.children}</div>

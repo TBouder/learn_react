@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/27 22:46:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 00:01:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ export default class Todo extends React.Component
 		{
 			if (user)
 				THIS.setState({login: user.displayName, image: user.photoURL});
-			else
-				render()
-				{
-					return (<div>{<Create_account/>}</div>)
-				}
-			//ELSE IF NO USER -> REDIRECT LOGIN
 		});
 
 		this.ft_load();
