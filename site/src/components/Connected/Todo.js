@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 00:01:53 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 12:10:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ export default class Todo extends React.Component
 		this.ft_change_value = this.ft_change_value.bind(this);
 		this.ft_change_tag_value = this.ft_change_tag_value.bind(this);
 		this.ft_load = this.ft_load.bind(this);
+		this.ft_unload = this.ft_unload.bind(this);
 
 		/*Load todo from database*/
 		firebase.auth().onAuthStateChanged(function(user)
@@ -51,6 +52,25 @@ export default class Todo extends React.Component
 		});
 
 		this.ft_load();
+		this.ft_unload();
+	}
+
+	/*************************************************************************/
+	/*This function loads the database on the page and create a new card*/
+	ft_load()
+	{
+		var THIS = this;
+		firebase.database().ref("todo_list").on("child_added", function (snapshot)
+		{
+			let key = snapshot.key;
+			let text = snapshot.val().text;
+			let time = snapshot.val().time;
+			let tag = snapshot.val().tag;
+			let user = snapshot.val().user;
+			let image = snapshot.val().image;
+			THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, key, text, time, tag, user, image));
+			THIS.setState({todo: THIS.state.todo + 1});
+		});
 	}
 
 	ft_add_card(THIS, uniqueid, description, date, tag, username, image)
@@ -96,48 +116,20 @@ export default class Todo extends React.Component
 			</div>
 		);
 	}
+	/*************************************************************************/
 
-	/*This function finds the next available place for an id in the array*/
-	ft_find_available(THIS)
+	/*************************************************************************/
+	/*Unload data from firebase (so delete it), and delete the card from the
+	current page*/
+	ft_unload()
 	{
-		var new_unique_id = 0;
-
-		firebase.database().ref("todo_list").orderByKey().once("value", function (snapshot)
+		var THIS = this;
+		firebase.database().ref("todo_list").on("child_removed", function (snapshot)
 		{
-			snapshot.forEach(function(childSnapshot)
-			{
-				let key = childSnapshot.key;
-				if (new_unique_id == key)
-					new_unique_id++;
-			});
-			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: ""});
+			THIS.ft_del_task(snapshot.key);
 		});
 	}
 
-	/*This function adds a task on the page and on the database*/
-	ft_add_task()
-	{
-		if (this.state.value != "")
-		{
-			var date = Date.now();
-			var tag = this.state.tag_value;
-			var login = this.state.login;
-			var image = this.state.image;
-			firebase.database().ref('/todo_list/' + this.state.uniqueid).set({text: this.state.value, time: date, tag: tag, user: login, image: image});
-			this.state.todo_array.unshift(this.ft_add_card(this, this.state.uniqueid, this.state.value, date, tag, login, image));
-			this.ft_find_available(this);
-			this.setState({todo: this.state.todo + 1});
-		}
-	}
-
-	/*This function calls the ft_add_task function when enter is pressed*/
-	ft_add_task_enter(e)
-	{
-		if (e.charCode == 13 || e.keyCode == 13)
-			{this.ft_add_task()};
-	}
-
-	/*This function remove a specific task*/
 	ft_del_task(id)
 	{
 		var len = this.state.todo_array.length;
@@ -156,41 +148,62 @@ export default class Todo extends React.Component
 		this.ft_find_available(this);
 		this.setState({todo: this.state.todo - 1});
 	}
+	/*************************************************************************/
 
-	/*This function changes the value of the text to be save*/
-	ft_change_value(event)		{ this.setState({value: event.target.value}); }
-	ft_change_tag_value(event)	{this.setState({tag_value: event.target.value}); }
-
-	/*This function loads the database on the page*/
-	ft_load()
+	/*************************************************************************/
+	/*Launcher to get data to send to the DB and as card*/
+	ft_add_task()
 	{
-		var THIS = this;
-		var	new_unique_id = 0;
-		var datas = [];
-		var	i = 0;
+		if (this.state.value != "")
+		{
+			var date = Date.now();
+			var tag = this.state.tag_value;
+			var login = this.state.login;
+			var image = this.state.image;
+			this.ft_find_available(this);
+			firebase.database().ref('/todo_list/').push().set(
+			{
+				text: this.state.value,
+				time: date,
+				tag: tag,
+				user: login,
+				image: image
+			});
+			this.setState({todo: this.state.todo + 1});
+		}
+	}
 
-		firebase.database().ref("todo_list").orderByChild("time").once("value", function (snapshot)
+	/*This function calls the ft_add_task function when enter is pressed*/
+	ft_add_task_enter(e)
+	{
+		if (e.charCode == 13 || e.keyCode == 13)
+			{this.ft_add_task()};
+	}
+	/*************************************************************************/
+
+	/*************************************************************************/
+	/*Some tools*/
+	/*This function finds the next available place for an id in the array*/
+	ft_find_available(THIS)
+	{
+		var new_unique_id = 0;
+
+		firebase.database().ref("todo_list").orderByKey().once("value", function (snapshot)
 		{
 			snapshot.forEach(function(childSnapshot)
 			{
 				let key = childSnapshot.key;
-				let text = childSnapshot.val().text;
-				let time = childSnapshot.val().time;
-				let tag = childSnapshot.val().tag;
-				let user = childSnapshot.val().user;
-				let image = childSnapshot.val().image;
 				if (new_unique_id == key)
 					new_unique_id++;
-				datas[i++] = [key, text, time, tag, user, image];
 			});
-			datas.forEach(function(element, index, array)
-			{
-				THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, element[0], element[1], element[2], element[3], element[4], element[5]));
-				THIS.setState({todo: THIS.state.todo + 1});
-			});
-			THIS.setState({uniqueid: new_unique_id});
+			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: ""});
 		});
 	}
+
+	/*This function changes the value of the text to be save*/
+	ft_change_value(event)		{ this.setState({value: event.target.value}); }
+	ft_change_tag_value(event)	{this.setState({tag_value: event.target.value}); }
+	/*************************************************************************/
 
 	render()
 	{
