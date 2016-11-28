@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 14:30:48 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/27 22:59:58 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 01:57:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ export default class Connected extends React.Component
 		var THIS = this;
 		firebase.auth().onAuthStateChanged(function(user)
 		{
-			console.log(THIS.props.location.pathname);
 			if (!user)
 				THIS.setState({compo: <Login_page/>});
 			else if (THIS.props.location.pathname == "/todo")
