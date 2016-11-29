@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:46:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/27 22:48:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 21:02:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ const routes = (
 		<Route path="/account" component={Account}/>
 		<Route path="/count" component={Connected}/>
 		<Route path="/todo" component={Connected}/>
+		<Route path="/projects" component={Connected}/>
+		<Route path="/add_project" component={Connected}/>
 		<Route path="*" component={Page_not_found}/>
 	</Route>
 );

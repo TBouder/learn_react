@@ -6,14 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 12:10:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 20:17:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React			from 'react';
 import {Link}			from 'react-router';
 import Firebase 		from 'firebase';
-import Create_account	from '../Account/Create_account';
 
 export default class Todo extends React.Component
 {
