@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 14:30:48 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 01:57:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 21:01:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ import Firebase 		from 'firebase';
 import Login_page		from './Account/Login_page';
 import Todo				from './Connected/Todo';
 import Count			from './Connected/Count';
+import Projects			from './Connected/Projects';
+import Add_project		from './Connected/Add_project';
 import Page_not_found	from './Page_not_found';
 
 
@@ -39,8 +41,12 @@ export default class Connected extends React.Component
 				THIS.setState({compo: <Todo/>});
 			else if (THIS.props.location.pathname == "/count")
 				THIS.setState({compo: <Count/>});
+			else if (THIS.props.location.pathname == "/projects")
+				THIS.setState({compo: <Projects/>});
+			else if (THIS.props.location.pathname == "/add_project")
+				THIS.setState({compo: <Add_project/>});
 			else
-			THIS.setState({compo: <Page_not_found/>});
+				THIS.setState({compo: <Page_not_found/>});
 		});
 	}
 
