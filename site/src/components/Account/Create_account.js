@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/27 23:42:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 22:26:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ export default class Create_page extends React.Component
 				auth.createUserWithEmailAndPassword(THIS.state.email, THIS.state.passwd).then(function(user)
 				{
 					THIS.setState({status: ft_create_success_message()});
-					user.updateProfile({displayName: THIS.state.login, photoURL: "http://localhost:8888/img/user.svg"});
+					user.updateProfile({displayName: THIS.state.login, photoURL: "/img/user.svg"});
 
 					firebase.database().ref('/users/' + THIS.state.login).set({
 						login: THIS.state.login,
