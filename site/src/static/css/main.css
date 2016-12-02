@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 01:17:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 23:39:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@
 .right_data
 {
 	margin-top: -3%;
+}
+
+.custom_descrip
+{
+	word-wrap: break-word !important;
 }
 
 /*body
