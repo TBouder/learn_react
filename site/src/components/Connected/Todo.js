@@ -6,13 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 20:17:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 01:58:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React			from 'react';
 import {Link}			from 'react-router';
 import Firebase 		from 'firebase';
+import ReactPlayer		from 'react-player'
 
 export default class Todo extends React.Component
 {
@@ -33,13 +34,16 @@ export default class Todo extends React.Component
 			todo_array: [],
 			uniqueid: 0,
 			value: "",
-			tag_value: ""
+			tag_value: "",
+			type_value: "",
+			tmp: 0
 		};
 
 		this.ft_add_task = this.ft_add_task.bind(this);
 		this.ft_del_task = this.ft_del_task.bind(this);
 		this.ft_change_value = this.ft_change_value.bind(this);
 		this.ft_change_tag_value = this.ft_change_tag_value.bind(this);
+		this.ft_change_type_value = this.ft_change_type_value.bind(this);
 		this.ft_load = this.ft_load.bind(this);
 		this.ft_unload = this.ft_unload.bind(this);
 
@@ -67,12 +71,14 @@ export default class Todo extends React.Component
 			let tag = snapshot.val().tag;
 			let user = snapshot.val().user;
 			let image = snapshot.val().image;
-			THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, key, text, time, tag, user, image));
+			let type = snapshot.val().type;
+			THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, key, text, time, tag, type, user, image));
 			THIS.setState({todo: THIS.state.todo + 1});
 		});
 	}
+	// {/* <div className="description custom_descrip">{description}</div> */}
 
-	ft_add_card(THIS, uniqueid, description, date, tag, username, image)
+	ft_add_card(THIS, uniqueid, description, date, tag, type, username, image)
 	{
 		function timeSince(date)
 		{
@@ -106,7 +112,13 @@ export default class Todo extends React.Component
 			    </div>
 
 				<div className="content">
-					<div className="description">{description}</div>
+					{
+						type == "video"
+						?
+						<ReactPlayer url={description} controls width="260px" height="120px"/>
+						:
+						<div className="description custom_descrip">{description}</div>
+					}
 				</div>
 
 				<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, uniqueid)}>
@@ -157,6 +169,8 @@ export default class Todo extends React.Component
 		{
 			var date = Date.now();
 			var tag = this.state.tag_value;
+			var type = this.state.type_value;
+				if (!type)	type = "text";
 			var login = this.state.login;
 			var image = this.state.image;
 			this.ft_find_available(this);
@@ -165,6 +179,7 @@ export default class Todo extends React.Component
 				text: this.state.value,
 				time: date,
 				tag: tag,
+				type: type,
 				user: login,
 				image: image
 			});
@@ -195,13 +210,20 @@ export default class Todo extends React.Component
 				if (new_unique_id == key)
 					new_unique_id++;
 			});
-			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: ""});
+			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: "", type_value: ""});
 		});
 	}
 
 	/*This function changes the value of the text to be save*/
-	ft_change_value(event)		{ this.setState({value: event.target.value}); }
+	ft_change_value(event)
+	{
+		if (event.target.value.length > 140)
+			this.setState({value: event.target.value.substring(0, 140)});
+		else
+			this.setState({value: event.target.value});
+	}
 	ft_change_tag_value(event)	{this.setState({tag_value: event.target.value}); }
+	ft_change_type_value(event)	{this.setState({type_value: event.target.value, tmp: 1}); }
 	/*************************************************************************/
 
 	render()
@@ -217,6 +239,8 @@ export default class Todo extends React.Component
 									<div className="ui fluid input">
 										<input type="text" value={this.state.value} placeholder="What do you want todododo ?" onChange={this.ft_change_value} onKeyPress={this.ft_add_task_enter.bind(this)}/>
 									</div>
+
+									<br />
 									<div className="ui fluid input">
 										<select name="tags" multiple="" className="ui fluid dropdown" value={this.state.tag_value} onChange={this.ft_change_tag_value} onKeyPress={this.ft_add_task_enter.bind(this)}>
 											<option value="">Select your tag !</option>
@@ -228,6 +252,21 @@ export default class Todo extends React.Component
 											<option value="#Space">Space</option>
 											<option value="#URGENT">URGENT</option>
 										</select>
+									</div>
+
+									<br />
+									<div className="ui fluid input">
+										<button className="fluid ui toggle icon button" value="text" onClick={this.ft_change_type_value}>
+											<i className="font icon" value="text" onClick={this.ft_change_type_value}></i>
+										</button>
+
+										<button className="fluid ui toggle icon button" value="video" onClick={this.ft_change_type_value}>
+											<i className="film icon" value="video" onClick={this.ft_change_type_value}></i>
+										</button>
+
+										<button className="fluid ui toggle icon button" value="image" onClick={this.ft_change_type_value}>
+											<i className="image icon" value="image" onClick={this.ft_change_type_value}></i>
+										</button>
 									</div>
 								</div>
 							</div>

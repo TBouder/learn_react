@@ -26,6 +26,7 @@
     "nodemon": "^1.10.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-player": "^0.12.1",
     "react-router": "^2.8.1",
     "webpack": "^1.13.2"
   }
