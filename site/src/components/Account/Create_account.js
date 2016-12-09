@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 22:26:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 02:03:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ export default class Create_page extends React.Component
 		this.ft_create_account = this.ft_create_account.bind(this);
 	}
 
+
 	ft_change_email(event)	{this.setState({email: event.target.value});}
 	ft_change_login(event)	{this.setState({login: event.target.value});}
 	ft_change_passwd(event)	{this.setState({passwd: event.target.value});}
@@ -33,9 +34,11 @@ export default class Create_page extends React.Component
 
 	ft_create_account()
 	{
-		const auth = firebase.auth();
-		const db = firebase.database();
-		var THIS = this;
+		String.prototype.capitalizeFirstLetter = function() {return this.charAt(0).toUpperCase() + this.slice(1);}
+		const	auth = firebase.auth();
+		const	db = firebase.database();
+		var		THIS = this;
+		var		username = THIS.state.login.capitalizeFirstLetter();
 
 		function ft_create_error_message(code, message)
 		{
@@ -48,27 +51,17 @@ export default class Create_page extends React.Component
 				</div>
 			)
 		}
-		function ft_create_success_message()
-		{
-			return (
-				<div className="ui success message">
-					<div className="header">login Created</div>
-				</div>
-			)
-		}
 
-		db.ref("/users/" + THIS.state.login).once("value", function(snapshot)
+		db.ref("/users/" + username).once("value", function(snapshot)
 		{
 			var new_user = snapshot.val();
 			if (!new_user)
 			{
 				auth.createUserWithEmailAndPassword(THIS.state.email, THIS.state.passwd).then(function(user)
 				{
-					THIS.setState({status: ft_create_success_message()});
-					user.updateProfile({displayName: THIS.state.login, photoURL: "/img/user.svg"});
-
-					firebase.database().ref('/users/' + THIS.state.login).set({
-						login: THIS.state.login,
+					user.updateProfile({displayName: username, photoURL: "/img/user.svg"});
+					firebase.database().ref('/users/' + username).set({
+						login: username,
 						email: THIS.state.email
 					});
 				}).catch(function(error)

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 23:39:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 01:35:51 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,28 @@
 	word-wrap: break-word !important;
 }
 
-/*body
+.button
 {
-	background-color: grey;
-}*/
+	margin-bottom: -0.5px !important;
+
+}
+.login_button:hover
+{
+	background-color: #21BA45 !important;
+}
+
+.ui.input input::-webkit-input-placeholder {
+  color: rgba(140, 140, 140, 0.87);
+}
+
+.ui.input input::-moz-placeholder {
+  color: rgba(140, 140, 140, 0.87);
+}
+
+.ui.input input:-ms-input-placeholder {
+  color: rgba(140, 140, 140, 0.87);
+}
+
 
 /* Animation */
 @-webkit-keyframes fadeIn	{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }

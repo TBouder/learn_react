@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 14:30:48 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 21:01:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 01:26:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ export default class Connected extends React.Component
 			if (!user)
 				THIS.setState({compo: <Login_page/>});
 			else if (THIS.props.location.pathname == "/todo")
-				THIS.setState({compo: <Todo/>});
+				THIS.setState({compo: <Todo user={user}/>});
 			else if (THIS.props.location.pathname == "/count")
 				THIS.setState({compo: <Count/>});
 			else if (THIS.props.location.pathname == "/projects")
