@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/02 01:58:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 01:36:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,22 @@ import ReactPlayer		from 'react-player'
 
 export default class Todo extends React.Component
 {
-	constructor()
+	constructor(props)
 	{
-		super();
+		super(props);
 		var THIS = this;
-		String.prototype.capitalizeFirstLetter = function() {return this.charAt(0).toUpperCase() + this.slice(1);}
 
-		const DB = firebase.database();
-		const REF = DB.ref("/users/");
-		const USER = firebase.auth().currentUser;
 		this.state =
 		{
-			login: "",
-			image: "",
+			login: this.props.user.displayName,
+			image: this.props.user.photoURL,
 			todo: 0,
 			todo_array: [],
 			uniqueid: 0,
 			value: "",
 			tag_value: "",
 			type_value: "",
+			lock_value: 0,
 			tmp: 0
 		};
 
@@ -44,15 +41,9 @@ export default class Todo extends React.Component
 		this.ft_change_value = this.ft_change_value.bind(this);
 		this.ft_change_tag_value = this.ft_change_tag_value.bind(this);
 		this.ft_change_type_value = this.ft_change_type_value.bind(this);
+		this.ft_change_lock_value = this.ft_change_lock_value.bind(this);
 		this.ft_load = this.ft_load.bind(this);
 		this.ft_unload = this.ft_unload.bind(this);
-
-		/*Load todo from database*/
-		firebase.auth().onAuthStateChanged(function(user)
-		{
-			if (user)
-				THIS.setState({login: user.displayName, image: user.photoURL});
-		});
 
 		this.ft_load();
 		this.ft_unload();
@@ -72,15 +63,19 @@ export default class Todo extends React.Component
 			let user = snapshot.val().user;
 			let image = snapshot.val().image;
 			let type = snapshot.val().type;
-			THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, key, text, time, tag, type, user, image));
+			let locked = snapshot.val().locked;
+			THIS.state.todo_array.unshift(THIS.ft_add_card(THIS, key, text, time, tag, type, user, image, locked));
 			THIS.setState({todo: THIS.state.todo + 1});
 		});
 	}
 	// {/* <div className="description custom_descrip">{description}</div> */}
 
-	ft_add_card(THIS, uniqueid, description, date, tag, type, username, image)
+	ft_add_card(THIS, uniqueid, description, date, tag, type, username, image, locked)
 	{
-		function timeSince(date)
+		var		done_button;
+		var		new_date;
+
+		function	timeSince(date)
 		{
 			var seconds = Math.floor((new Date() - date) / 1000);
 			var interval;
@@ -98,7 +93,27 @@ export default class Todo extends React.Component
 			return (Math.floor(seconds) + " seconds ago");
 		}
 
-		var new_date = timeSince(date);
+		if ((locked && username == THIS.state.login) || !locked)
+		{
+			done_button =
+			(
+				<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, uniqueid)}>
+					<i className="checkmark icon"></i> Done
+				</div>
+			);
+		}
+		else if (locked)
+		{
+			done_button =
+			(
+				<div className="ui bottom attached button red">
+					<i className="remove icon"></i> Locked
+				</div>
+			);
+		}
+
+		new_date = timeSince(date);
+
 		return (
 			<div className="ui card fade-in segment" key={uniqueid}>
 				<div className="content">
@@ -115,15 +130,13 @@ export default class Todo extends React.Component
 					{
 						type == "video"
 						?
-						<ReactPlayer url={description} controls width="260px" height="120px"/>
+						<ReactPlayer url={description} controls width="260px" height="140px"/>
 						:
 						<div className="description custom_descrip">{description}</div>
 					}
 				</div>
 
-				<div className="ui bottom attached button green" onClick={THIS.ft_del_task.bind(THIS, uniqueid)}>
-					<i className="checkmark icon"></i> Done
-				</div>
+				{done_button}
 			</div>
 		);
 	}
@@ -167,12 +180,15 @@ export default class Todo extends React.Component
 	{
 		if (this.state.value != "")
 		{
-			var date = Date.now();
-			var tag = this.state.tag_value;
-			var type = this.state.type_value;
-				if (!type)	type = "text";
-			var login = this.state.login;
-			var image = this.state.image;
+			let		date = Date.now();
+			let		tag = this.state.tag_value;
+			let		type = this.state.type_value;
+			let		login = this.state.login;
+			let		image = this.state.image;
+			let		locked = this.state.lock_value;
+
+			if (!type)
+				type = "text";
 			this.ft_find_available(this);
 			firebase.database().ref('/todo_list/').push().set(
 			{
@@ -181,7 +197,8 @@ export default class Todo extends React.Component
 				tag: tag,
 				type: type,
 				user: login,
-				image: image
+				image: image,
+				locked: locked
 			});
 			this.setState({todo: this.state.todo + 1});
 		}
@@ -210,7 +227,7 @@ export default class Todo extends React.Component
 				if (new_unique_id == key)
 					new_unique_id++;
 			});
-			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: "", type_value: ""});
+			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: "", type_value: "", lock_value: 0});
 		});
 	}
 
@@ -224,6 +241,13 @@ export default class Todo extends React.Component
 	}
 	ft_change_tag_value(event)	{this.setState({tag_value: event.target.value}); }
 	ft_change_type_value(event)	{this.setState({type_value: event.target.value, tmp: 1}); }
+	ft_change_lock_value(event)
+	{
+		if (this.state.lock_value == 0)
+			this.setState({lock_value: 1});
+		else
+			this.setState({lock_value: 0});
+	}
 	/*************************************************************************/
 
 	render()
@@ -256,9 +280,17 @@ export default class Todo extends React.Component
 
 									<br />
 									<div className="ui fluid input">
-										<button className="fluid ui toggle icon button" value="text" onClick={this.ft_change_type_value}>
-											<i className="font icon" value="text" onClick={this.ft_change_type_value}></i>
-										</button>
+										{
+											this.state.lock_value == 1
+											?
+											<button className="fluid ui icon teal button" value="text" onClick={this.ft_change_lock_value}>
+												<i className="lock icon" value="text" onClick={this.ft_change_lock_value}></i>
+											</button>
+											:
+											<button className="fluid ui icon button" value="text" onClick={this.ft_change_lock_value}>
+												<i className="lock icon" value="text" onClick={this.ft_change_lock_value}></i>
+											</button>
+										}
 
 										<button className="fluid ui toggle icon button" value="video" onClick={this.ft_change_type_value}>
 											<i className="film icon" value="video" onClick={this.ft_change_type_value}></i>

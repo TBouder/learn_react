@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/10/16 15:03:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 01:58:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ export default class Login_page extends React.Component
 	ft_change_login(event)	{this.setState({login: event.target.value});}
 	ft_change_passwd(event)	{this.setState({passwd: event.target.value});}
 	ft_catch_enter(e)		{e.charCode == 13 || e.keyCode == 13 ? this.ft_send_login() : false;}
-	
+
 	ft_send_login()
 	{
-		const auth = firebase.auth();
-		const db = firebase.database();
-		var THIS = this;
+		String.prototype.capitalizeFirstLetter = function() {return this.charAt(0).toUpperCase() + this.slice(1);}
+		const	auth = firebase.auth();
+		const	db = firebase.database();
+		var		THIS = this;
+		var		username = THIS.state.login.capitalizeFirstLetter();
 
 		function ft_create_error_message(code, message)
 		{
@@ -51,23 +53,15 @@ export default class Login_page extends React.Component
 				</div>
 			)
 		}
-		function ft_create_success_message()
-		{
-			return (
-				<div className="ui success message">
-					<div className="header">login Created</div>
-				</div>
-			)
-		}
 
-		db.ref("/users/" + THIS.state.login).on("value", function(snapshot)
+		db.ref("/users/" + username).on("value", function(snapshot)
 		{
-			var new_user = snapshot.val();
+			var new_user = snapshot.val()
 			if (new_user)
 			{
 				auth.signInWithEmailAndPassword(new_user.email, THIS.state.passwd).then(function(user)
 				{
-					THIS.setState({status: ft_create_success_message()});
+					;
 				}).catch(function(error)
 				{
 					THIS.setState({status: ft_create_error_message(error.code, error.message)});
@@ -79,7 +73,6 @@ export default class Login_page extends React.Component
 			}
 		});
 	}
-
 
 	render()
 	{
@@ -101,7 +94,7 @@ export default class Login_page extends React.Component
 									</div>
 								</div>
 							</div>
-							<div className="ui bottom attached button" onClick={this.ft_send_login.bind(this)}>
+							<div className="ui bottom attached button login_button" onClick={this.ft_send_login.bind(this)}>
 								Connect
 							</div>
 						</div>
