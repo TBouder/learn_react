@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 01:36:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 10:46:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ export default class Todo extends React.Component
 			uniqueid: 0,
 			value: "",
 			tag_value: "",
-			type_value: "",
-			lock_value: 0,
+			lock_bool: 0,
+			video_bool: 0,
 			tmp: 0
 		};
 
@@ -40,8 +40,8 @@ export default class Todo extends React.Component
 		this.ft_del_task = this.ft_del_task.bind(this);
 		this.ft_change_value = this.ft_change_value.bind(this);
 		this.ft_change_tag_value = this.ft_change_tag_value.bind(this);
-		this.ft_change_type_value = this.ft_change_type_value.bind(this);
-		this.ft_change_lock_value = this.ft_change_lock_value.bind(this);
+		this.ft_change_lock_bool = this.ft_change_lock_bool.bind(this);
+		this.ft_change_video_bool = this.ft_change_video_bool.bind(this);
 		this.ft_load = this.ft_load.bind(this);
 		this.ft_unload = this.ft_unload.bind(this);
 
@@ -182,23 +182,21 @@ export default class Todo extends React.Component
 		{
 			let		date = Date.now();
 			let		tag = this.state.tag_value;
-			let		type = this.state.type_value;
 			let		login = this.state.login;
 			let		image = this.state.image;
-			let		locked = this.state.lock_value;
+			let		is_locked = this.state.lock_bool;
+			let		is_video = this.state.video_bool == 1 ? "video" : "text";
 
-			if (!type)
-				type = "text";
 			this.ft_find_available(this);
 			firebase.database().ref('/todo_list/').push().set(
 			{
 				text: this.state.value,
 				time: date,
 				tag: tag,
-				type: type,
+				type: is_video,
 				user: login,
 				image: image,
-				locked: locked
+				locked: is_locked
 			});
 			this.setState({todo: this.state.todo + 1});
 		}
@@ -227,7 +225,7 @@ export default class Todo extends React.Component
 				if (new_unique_id == key)
 					new_unique_id++;
 			});
-			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: "", type_value: "", lock_value: 0});
+			THIS.setState({uniqueid: new_unique_id, value: "", tag_value: "", type_value: "", lock_bool: 0, video_bool: 0});
 		});
 	}
 
@@ -240,13 +238,19 @@ export default class Todo extends React.Component
 			this.setState({value: event.target.value});
 	}
 	ft_change_tag_value(event)	{this.setState({tag_value: event.target.value}); }
-	ft_change_type_value(event)	{this.setState({type_value: event.target.value, tmp: 1}); }
-	ft_change_lock_value(event)
+	ft_change_lock_bool(event)
 	{
-		if (this.state.lock_value == 0)
-			this.setState({lock_value: 1});
+		if (this.state.lock_bool == 0)
+			this.setState({lock_bool: 1});
 		else
-			this.setState({lock_value: 0});
+			this.setState({lock_bool: 0});
+	}
+	ft_change_video_bool(event)
+	{
+		if (this.state.video_bool == 0)
+			this.setState({video_bool: 1});
+		else
+			this.setState({video_bool: 0});
 	}
 	/*************************************************************************/
 
@@ -281,24 +285,32 @@ export default class Todo extends React.Component
 									<br />
 									<div className="ui fluid input">
 										{
-											this.state.lock_value == 1
+											this.state.lock_bool == 1
 											?
-											<button className="fluid ui icon teal button" value="text" onClick={this.ft_change_lock_value}>
-												<i className="lock icon" value="text" onClick={this.ft_change_lock_value}></i>
+											<button className="fluid ui icon teal button" value="text" onClick={this.ft_change_lock_bool}>
+												<i className="lock icon" value="text" onClick={this.ft_change_lock_bool}></i>
 											</button>
 											:
-											<button className="fluid ui icon button" value="text" onClick={this.ft_change_lock_value}>
-												<i className="lock icon" value="text" onClick={this.ft_change_lock_value}></i>
+											<button className="fluid ui icon button" value="text" onClick={this.ft_change_lock_bool}>
+												<i className="lock icon" value="text" onClick={this.ft_change_lock_bool}></i>
 											</button>
 										}
 
-										<button className="fluid ui toggle icon button" value="video" onClick={this.ft_change_type_value}>
-											<i className="film icon" value="video" onClick={this.ft_change_type_value}></i>
-										</button>
+										{
+											this.state.video_bool == 1
+											?
+											<button className="fluid ui icon teal button" value="video" onClick={this.ft_change_video_bool}>
+												<i className="film icon" value="video" onClick={this.ft_change_video_bool}></i>
+											</button>
+											:
+											<button className="fluid ui icon button" value="video" onClick={this.ft_change_video_bool}>
+												<i className="film icon" value="video" onClick={this.ft_change_video_bool}></i>
+											</button>
+										}
 
-										<button className="fluid ui toggle icon button" value="image" onClick={this.ft_change_type_value}>
+										{/* <button className="fluid ui toggle icon button" value="image" onClick={this.ft_change_type_value}>
 											<i className="image icon" value="image" onClick={this.ft_change_type_value}></i>
-										</button>
+										</button> */}
 									</div>
 								</div>
 							</div>
