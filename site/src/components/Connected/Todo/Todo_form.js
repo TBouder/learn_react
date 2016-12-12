@@ -6,16 +6,15 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/11 01:29:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 01:25:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React			from 'react';
 import {Link}			from 'react-router';
 import Firebase 		from 'firebase';
-import ReactPlayer		from 'react-player'
-import Todo_content		from './Todo_content';
-
+import ReactPlayer		from 'react-player';
+import Todo_tags		from './Todo_tags';
 
 export default class Todo_form extends React.Component
 {
@@ -69,7 +68,7 @@ export default class Todo_form extends React.Component
 		if (this.state.value != "")
 		{
 			let		date = Date.now();
-			let		tag = this.state.tag_value;
+			let		tag = this.refs.tags.getData();
 			let		login = this.state.login;
 			let		image = this.state.image;
 			let		is_locked = this.state.lock_bool;
@@ -164,7 +163,7 @@ export default class Todo_form extends React.Component
 								</div>
 
 								<br />
-								<div className="ui fluid input">
+								{/* <div className="ui fluid input">
 									<select name="tags" multiple="" className="ui fluid dropdown" value={this.state.tag_value} onChange={this.ft_change_tag_value} onKeyPress={this.ft_add_task_enter.bind(this)}>
 										<option value="">Select your tag !</option>
 										<option value="#Fun">Fun</option>
@@ -175,7 +174,9 @@ export default class Todo_form extends React.Component
 										<option value="#Space">Space</option>
 										<option value="#URGENT">URGENT</option>
 									</select>
-								</div>
+								</div> */}
+
+								{<Todo_tags ref="tags"/>}
 
 								<br />
 								<div className="ui fluid input">

@@ -6,14 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/11 00:15:57 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/11 16:23:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React			from 'react';
 import {Link}			from 'react-router';
 import Firebase 		from 'firebase';
-import ReactPlayer		from 'react-player'
+import ReactPlayer		from 'react-player';
 import Todo_form		from './Todo_form';
 import Todo_content		from './Todo_content';
 
