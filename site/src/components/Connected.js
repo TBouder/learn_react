@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 14:30:48 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 01:26:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/11 16:08:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ import React			from 'react';
 import {Link}			from 'react-router';
 import Firebase 		from 'firebase';
 import Login_page		from './Account/Login_page';
-import Todo				from './Connected/Todo';
+import Todo				from './Connected/Todo/Todo';
 import Count			from './Connected/Count';
 import Projects			from './Connected/Projects';
 import Add_project		from './Connected/Add_project';

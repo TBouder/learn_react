@@ -5,7 +5,7 @@
      By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+
                                                   +#+#+#+#+#+   +#+
      Created: 2016/10/03 11:44:33 by tbouder           #+#    #+#
-     Updated: 2016/10/03 12:07:42 by tbouder          ###   ########.fr
+     Updated: 2016/12/11 23:37:49 by tbouder          ###   ########.fr
 -->
 
 <!DOCTYPE html>
@@ -27,6 +27,7 @@
 				var updated_list = this.state.init; //Original list
 				updated_list = updated_list.filter(function(item) //On filtre
 				{
+					// return item.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
 					return item.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
 				});
 				this.setState({items: updated_list}); //On met la nouvelle liste dans items

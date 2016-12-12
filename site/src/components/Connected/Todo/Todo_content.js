@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/11 01:27:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 02:02:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ export default class Todo_content extends React.Component
 				<div className="content">
 					<div className="right floated right_data">
 						<div className="meta">{new_date}</div>
-						<div className="meta">{tag}</div>
+						<div className="meta">#{tag}</div>
 					</div>
 					<div className="left floated">
 						<img className="ui avatar image" src={image}/> {username}
