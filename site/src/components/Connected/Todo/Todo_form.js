@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 01:25:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 02:35:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ export default class Todo_form extends React.Component
 		{
 			let		date = Date.now();
 			let		tag = this.refs.tags.getData();
-			let		login = this.state.login;
+			let		login = this.props.user.displayName;
 			let		image = this.state.image;
 			let		is_locked = this.state.lock_bool;
 			let		media = this.state.video_bool == 1 ? "video" : "text";
@@ -163,18 +163,6 @@ export default class Todo_form extends React.Component
 								</div>
 
 								<br />
-								{/* <div className="ui fluid input">
-									<select name="tags" multiple="" className="ui fluid dropdown" value={this.state.tag_value} onChange={this.ft_change_tag_value} onKeyPress={this.ft_add_task_enter.bind(this)}>
-										<option value="">Select your tag !</option>
-										<option value="#Fun">Fun</option>
-										<option value="#Cool">Cool</option>
-										<option value="#Game">Game</option>
-										<option value="#Love">Love</option>
-										<option value="#Mars">Mars</option>
-										<option value="#Space">Space</option>
-										<option value="#URGENT">URGENT</option>
-									</select>
-								</div> */}
 
 								{<Todo_tags ref="tags"/>}
 

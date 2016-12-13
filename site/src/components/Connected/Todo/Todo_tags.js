@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 09:32:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 02:05:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ export default class Todo_tags extends React.Component
 		this.ft_change_user_tag = this.ft_change_user_tag.bind(this);
 		this.ft_load_tag_list = this.ft_load_tag_list.bind(this);
 		this.ft_select_user_tag = this.ft_select_user_tag.bind(this);
-		this.ft_labels = this.ft_labels.bind(this);
 
 		this.ft_load_tag_list();
 	}
@@ -45,8 +44,9 @@ export default class Todo_tags extends React.Component
 
 		firebase.database().ref("todo_tags").on("child_added", function (snapshot)
 		{
-			let key = snapshot.key;
-			let tag = snapshot.val().tag;
+			let		tag = snapshot.val().tag;
+			let		key = snapshot.key;
+
 			THIS.state.tag_list.unshift(<option value={tag} key={key}>{tag}</option>);
 			THIS.state.tag_list_raw.unshift(tag);
 			THIS.setState({tmp: THIS.state.tmp + 1});
@@ -55,7 +55,8 @@ export default class Todo_tags extends React.Component
 
 	ft_change_user_tag(event)
 	{
-		var updated_list = this.state.tag_list_raw;
+		var		tag_labels = [];
+		var 	updated_list = this.state.tag_list_raw;
 
 		if (event.target.value !== "")
 		{
@@ -63,8 +64,18 @@ export default class Todo_tags extends React.Component
 			{
 				return item.toString().toLowerCase().search(event.target.value.toString().toLowerCase()) !== -1;
 			});
+
+			if (updated_list)
+			{
+				if (updated_list[0])
+					tag_labels.unshift(<button className="ui teal label" key="unique_tag_1" onClick={this.ft_select_user_tag.bind(this, updated_list[0])}>{updated_list[0]}</button>);
+				if (updated_list[1])
+					tag_labels.unshift(<button className="ui teal label" key="unique_tag_2" onClick={this.ft_select_user_tag.bind(this, updated_list[1])}>{updated_list[1]}</button>);
+				if (updated_list[2])
+					tag_labels.unshift(<button className="ui teal label" key="unique_tag_3" onClick={this.ft_select_user_tag.bind(this, updated_list[2])}>{updated_list[2]}</button>);
+				this.setState({tag_labels: tag_labels});
+			}
 			this.setState({tag_list_up: updated_list});
-			this.ft_labels();
 		}
 		else
 			this.setState({tag_list_up: "", tag_labels: ""});
@@ -76,19 +87,6 @@ export default class Todo_tags extends React.Component
 		this.setState({user_tag: value});
 	}
 
-	ft_labels()
-	{
-		var		tag_labels = [];
-
-		if (this.state.tag_list_up[0])
-			tag_labels.unshift(<button className="ui teal label" key="unique_tag_1" onClick={this.ft_select_user_tag.bind(this, this.state.tag_list_up[0])}>{this.state.tag_list_up[0]}</button>);
-		if (this.state.tag_list_up[1])
-			tag_labels.unshift(<button className="ui teal label" key="unique_tag_2" onClick={this.ft_select_user_tag.bind(this, this.state.tag_list_up[1])}>{this.state.tag_list_up[1]}</button>);
-		if (this.state.tag_list_up[2])
-			tag_labels.unshift(<button className="ui teal label" key="unique_tag_3" onClick={this.ft_select_user_tag.bind(this, this.state.tag_list_up[2])}>{this.state.tag_list_up[2]}</button>);
-		this.setState({tag_labels: tag_labels});
-	}
-
 	getData()
 	{
 		let		tag = this.state.user_tag;
@@ -98,11 +96,18 @@ export default class Todo_tags extends React.Component
 
 		firebase.database().ref("todo_tags").on("child_added", function(snapshot)
 		{
-			if (snapshot.val().tag == tag)
+			let		val_key = snapshot.key;
+			let		val_tag = snapshot.val().tag;
+			let		val_count = snapshot.val().count;
+
+			if (val_tag == tag)
+			{
 				match = 1;
+				firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count + 1});
+			}
 		});
-			if (match == 0)
-				firebase.database().ref('/todo_tags/').push().set({tag: tag});
+		if (match == 0)
+			firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
 		return (tag);
 	}
 
@@ -111,7 +116,7 @@ export default class Todo_tags extends React.Component
 		return (
 			<div>
 				<div className="ui right labeled input teal fluid">
-					<div className="ui label">#</div>
+					<div className="ui teal label">#</div>
 					<input type="text" placeholder="Tag" onChange={this.ft_change_user_tag} value={this.state.user_tag}/>
 				</div>
 				<br />

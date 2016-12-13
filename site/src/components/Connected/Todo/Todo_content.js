@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 02:02:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 02:34:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,25 @@ export default class Todo_content extends React.Component
 		var THIS = this;
 		firebase.database().ref("todo_list").on("child_removed", function (snapshot)
 		{
+			var		tag = snapshot.val().tag;
 			THIS.ft_del_task(snapshot.key);
 			THIS.setState({tmp: THIS.state.tmp - 1});
+
+			firebase.database().ref("todo_tags").on("child_added", function(snapshot)
+			{
+				let		val_key = snapshot.key;
+				let		val_tag = snapshot.val().tag;
+				let		val_count = snapshot.val().count;
+
+				if (val_tag == tag)
+				{
+					if (val_count == 1)
+						firebase.database().ref('/todo_tags/').child(val_key).remove();
+					else
+						firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count - 1});
+				}
+			});
+
 		});
 	}
 
