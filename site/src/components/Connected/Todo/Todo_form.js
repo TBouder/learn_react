@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 02:35:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 10:54:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,9 @@ export default class Todo_form extends React.Component
 								</div>
 							</div>
 						</div>
-						<div className="ui bottom attached button" onClick={this.ft_add_task}>
+						<button className="ui bottom attached button" onClick={this.ft_add_task}>
 							<i className="add icon"></i>
-						</div>
+						</button>
 					</div>
 				</div>
 			</div>
