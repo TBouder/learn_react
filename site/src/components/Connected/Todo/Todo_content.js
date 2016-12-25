@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 02:34:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 12:07:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ export default class Todo_content extends React.Component
 			THIS.ft_del_task(snapshot.key);
 			THIS.setState({tmp: THIS.state.tmp - 1});
 
-			firebase.database().ref("todo_tags").on("child_added", function(snapshot)
+			firebase.database().ref("todo_tags").on("value", function(snapshot)
 			{
 				let		val_key = snapshot.key;
 				let		val_tag = snapshot.val().tag;
