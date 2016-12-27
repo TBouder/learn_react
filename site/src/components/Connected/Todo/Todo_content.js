@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:07:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 16:21:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ export default class Todo_content extends React.Component
 						:
 						type == "picture"
 						?
-						<img src={description} width="260px" height="140px"/>
+						<a href={description}><img src={description} width="260px" height="140px"/></a>
 						:
 						<div className="description custom_descrip">{description}</div>
 					}
