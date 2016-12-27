@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 01:35:51 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 16:08:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@
 	margin-top: -3%;
 }
 
+.hello_title
+{
+	font-size: 1rem !important;
+}
+
+.navbar_menu
+{
+	justify-content: center !important;
+	margin-top: -0.5em !important;
+}
+
 .custom_descrip
 {
 	word-wrap: break-word !important;
@@ -89,11 +100,16 @@
 .button
 {
 	margin-bottom: -0.5px !important;
-
 }
 .login_button:hover
 {
 	background-color: #21BA45 !important;
+}
+
+.ui.cards
+{
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
 
 .ui.input input::-webkit-input-placeholder {

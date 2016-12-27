@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 01:23:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 16:10:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,18 @@ export default class Base extends React.Component
 		return (
 			<div>
 				<header>
-					<div className="ui inverted segment full_width">
-						<div className="ui inverted secondary pointing menu">
-							<h4 className="item">Hello {this.state.currentUser.displayName} !</h4>
-							<Link to="/"><span className={this.props.location.pathname == "/" ? "active item" : "item"}>Home</span></Link>
-							<Link to="/count"><span className={this.props.location.pathname == "/count" ? "active item" : "item"}>Counter</span></Link>
-							<Link to="/todo"><span className={this.props.location.pathname == "/todo" ? "active item" : "item"}>Todo-list</span></Link>
+					<div className='ui inverted segment navbar'>
+						<div className='ui inverted secondary menu'>
+							<h2 className='ui header active item hello_title'>Hello {this.state.currentUser.displayName} !</h2>
+							<div className='item right'>
+								{this.state.compo}
+							</div>
+						</div>
 
-							{this.state.compo}
+						<div className='ui inverted secondary menu navbar_menu'>
+							<Link to="/"><a className={this.props.location.pathname == "/" ? "active item" : "item"}>Home</a></Link>
+							<Link to="/count"><a className={this.props.location.pathname == "/count" ? "active item" : "item"}>Counter</a></Link>
+							<Link to="/todo"><span className={this.props.location.pathname == "/todo" ? "active item" : "item"}>Todo-list</span></Link>
 						</div>
 					</div>
 				</header>
