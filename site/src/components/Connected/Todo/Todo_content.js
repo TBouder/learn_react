@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 16:21:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/28 23:48:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ export default class Todo_content extends React.Component
 
 		return (
 			<div className="ui card fade-in segment" key={uniqueid}>
-				<div className="content">
+				<div className="content card_header">
 					<div className="right floated right_data">
 						<div className="meta">{new_date}</div>
 						<div className="meta">#{tag}</div>
@@ -119,7 +119,7 @@ export default class Todo_content extends React.Component
 					</div>
 			    </div>
 
-				<div className="content">
+				<div className="content card_content">
 					{
 						type == "video"
 						?
