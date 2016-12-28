@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 16:08:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/28 23:56:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,21 @@
 {
 	margin-left: 0 !important;
 	margin-right: 0 !important;
+}
+
+.ui.cards > .card > .content,
+.ui.card > .content
+{
+  border-top: none !important;
+}
+
+.card_header
+{
+	border-bottom: 1px solid rgba(34, 36, 38, 0.1) !important;
+}
+.card_content
+{
+	min-height: 12%;
 }
 
 .ui.input input::-webkit-input-placeholder {
