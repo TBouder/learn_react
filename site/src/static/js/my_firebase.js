@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   app-client.js                                      :+:      :+:    :+:   */
+/*   my_firebase.js                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/03 22:56:12 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/12 21:29:55 by tbouder          ###   ########.fr       */
+/*   Created: 2017/01/12 20:47:23 by tbouder           #+#    #+#             */
+/*   Updated: 2017/01/12 20:47:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React		from 'react';
-import ReactDOM		from 'react-dom';
-import AppRoutes	from './components/AppRoutes';
-
-// document.getElementById("main").style.display = 'none';
-window.onload = function()
-{
-		// document.getElementById("main").style.display = 'block';
-	ReactDOM.render(<AppRoutes/>, document.getElementById('main'));
+var config = {
+	apiKey: "AIzaSyD48dG8QuSSImqe4k-D61BrGAKDFGpqtd0",
+	authDomain: "todo-ca6be.firebaseapp.com",
+	databaseURL: "https://todo-ca6be.firebaseio.com",
+	storageBucket: "",
+	messagingSenderId: "573402902755"
 };
+firebase.initializeApp(config);
