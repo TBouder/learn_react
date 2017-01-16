@@ -152,7 +152,7 @@ export default class Todo_form extends React.Component
 	render()
 	{
 		return (
-			<div className="text_center padding_five page_center">
+			<div className="center padding_five page_center">
 				<div className="ui cards centered">
 					<div className="card">
 						<div className="content">

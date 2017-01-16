@@ -19,11 +19,11 @@ export default class Index extends React.Component
 	{
 		return (
 			<div>
-				<div className="text_center padding_two">
+				<div className="center padding_two">
 					<h1>Hello, world!</h1>
 				</div>
 
-				<div className="text_center padding_two">
+				<div className="center padding_two">
 					<Link to = "/count">
 						<button className="ui labeled icon button">
 							<i className="plus icon"></i>

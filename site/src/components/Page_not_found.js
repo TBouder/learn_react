@@ -19,12 +19,12 @@ export default class Page_not_found extends React.Component
 	{
 		return (
 			<div>
-				<div className="text_center padding_two">
+				<div className="center padding_two">
 					<h1> 404 </h1>
 					<h2>Page not found!</h2>
 				</div>
 
-				<div className="text_center padding_two">
+				<div className="center padding_two">
 					<Link to = "/">
 						<button className="ui labeled icon button">
 							<i className="hand spock icon"></i>

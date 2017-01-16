@@ -78,7 +78,7 @@ export default class Projects extends React.Component
 	{
 		return (
 			<div>
-				<div className="text_center padding_five page_center">
+				<div className="center padding_five page_center">
 					<div className="ui cards centered">
 						{this.state.todo_array}
 					</div>

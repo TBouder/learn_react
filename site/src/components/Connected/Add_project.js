@@ -74,7 +74,7 @@ export default class Add_projects extends React.Component
 	{
 		return (
 			<div>
-				<div className="text_center padding_five page_center">
+				<div className="center padding_five page_center">
 					<div className="ui cards centered">
 						<div className="card">
 							<div className="content">

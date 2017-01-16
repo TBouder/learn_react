@@ -80,7 +80,7 @@ export default class Create_page extends React.Component
 	{
 		return (
 			<div key="2">
-				<div className="text_center padding_five page_center">
+				<div className="center padding_five page_center">
 					{this.state.status}
 					<div className="ui cards centered">
 						<div className="card">

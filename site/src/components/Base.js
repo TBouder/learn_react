@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/12 22:41:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/12 22:47:51 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ export default class Base extends React.Component
 				<div>{this.props.children}</div>
 
 				<footer>
-					<div className="text_center padding_ten">
+					<div className="center padding_ten">
 						<strong>React</strong> and <strong>Express</strong> by <strong>Tbouder</strong>.
 					</div>
 				</footer>

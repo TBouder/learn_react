@@ -190,7 +190,7 @@ export default class Todo_content extends React.Component
 	render()
 	{
 		return (
-			<div className="text_center padding_two page_center">
+			<div className="center padding_two page_center">
 				<div className="ui cards centered">
 					{this.state.todo_array}
 				</div>

@@ -6,11 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/12 22:37:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/12 22:48:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-.text_center
+.center
 {
 	text-align: center;
 }
@@ -85,12 +85,6 @@
 {
 	font-size: 1rem !important;
 }
-
-/*.navbar_menu
-{
-	justify-content: center !important;
-	margin-top: -0.5em !important;
-}*/
 
 .custom_descrip
 {
@@ -196,12 +190,6 @@
 .navbar_right
 {
 	margin-right: 1vw;
-}
-
-.navbar_cart_icon
-{
-	background-color: #404B4E !important;
-	color: #FFFFFF !important;
 }
 
 .navbar_cart_icon:hover

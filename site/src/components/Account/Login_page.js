@@ -78,7 +78,7 @@ export default class Login_page extends React.Component
 	{
 		return (
 			<div>
-				<div className="text_center padding_five page_center">
+				<div className="center padding_five page_center">
 					{this.state.status}
 					<div className="ui cards centered">
 						<div className="card">
