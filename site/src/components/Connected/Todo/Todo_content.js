@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/16 22:53:08 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 23:46:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,6 @@ export default class Todo_content extends React.Component
 	***************************************************************************/
 	ft_add_card(THIS, uniqid, descrip, date, tag, type, username, image, locked)
 	{
-		function	timeSince(date)
-		{
-			var seconds = Math.floor((new Date() - date) / 1000);
-			var interval;
-
-			if ((interval = Math.floor(seconds / 31536000)) > 1)
-				return (interval + " years ago");
-			if ((interval = Math.floor(seconds / 2592000)) > 1)
-				return (interval + " months ago");
-			if ((interval = Math.floor(seconds / 86400)) > 1)
-				return (interval + " days ago");
-			if ((interval = Math.floor(seconds / 3600)) > 1)
-				return (interval + " hours ago");
-			if ((interval = Math.floor(seconds / 60)) > 1)
-				return (interval + " minutes ago");
-			return (Math.floor(seconds) + " seconds ago");
-		}
-
 		function	ft_done_button(locked, username, uniqid, THIS)
 		{
 			let		ret;

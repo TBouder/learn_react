@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/16 19:55:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 23:45:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ export default class Todo_form extends React.Component
 		this.ft_count_todo();
 	}
 
-	/*
+	/**	FT_COUNT_TODO **********************************************************
 	**	The ft_count_todo() function loads the database and counts the number of
 	**	todo to put in this.state.todo
-	*/
+	***************************************************************************/
 	ft_count_todo()
 	{
 		var THIS = this;
@@ -59,10 +59,10 @@ export default class Todo_form extends React.Component
 		});
 	}
 
-	/*
+	/**	FT_ADD_TASK ************************************************************
 	**	The ft_add_task() function takes no parameters and add a task in the
 	**	database, then, re-set to null all the user inputs
-	*/
+	***************************************************************************/
 	ft_add_task()
 	{
 		if (this.state.value != "")
@@ -91,20 +91,20 @@ export default class Todo_form extends React.Component
 		}
 	}
 
-	/*
+	/**	FT_ADD_TASK_ENTER ******************************************************
 	**	The ft_add_task_enter() function detects when the user press enter and
 	**	launch the above function (ft_add_task)
-	*/
+	***************************************************************************/
 	ft_add_task_enter(e)
 	{
 		if (e.charCode == 13 || e.keyCode == 13)
 			{this.ft_add_task()};
 	}
 
-	/*
+	/**	FT_CHANGE_XXX **********************************************************
 	**	Theses ft_change_XXX() functions change the value of the corresponding
 	**	state to get the user input
-	*/
+	***************************************************************************/
 	ft_change_value(event)
 	{
 		if (event.target.value.length > 140)
@@ -150,7 +150,6 @@ export default class Todo_form extends React.Component
 		else
 			this.setState({picture_bool: 0});
 	}
-	/*************************************************************************/
 
 	render()
 	{
