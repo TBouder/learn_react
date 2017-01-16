@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/16 19:09:02 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 22:53:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ export default class Todo_content extends React.Component
 	/**	FT_ADD_CARD ************************************************************
 	**	The ft_add_card() function add a card on the page with all the data.
 	***************************************************************************/
-	ft_add_card(THIS, uniqueid, description, date, tag, type, username, image, locked)
+	ft_add_card(THIS, uniqid, descrip, date, tag, type, username, image, locked)
 	{
 		function	timeSince(date)
 		{
@@ -84,7 +84,7 @@ export default class Todo_content extends React.Component
 			return (Math.floor(seconds) + " seconds ago");
 		}
 
-		function	ft_done_button(locked, username, uniqueid, THIS)
+		function	ft_done_button(locked, username, uniqid, THIS)
 		{
 			let		ret;
 
@@ -93,7 +93,7 @@ export default class Todo_content extends React.Component
 				ret =
 				(
 					<div className="ui bottom attached button green"
-						onClick={THIS.ft_del_task.bind(THIS, uniqueid)}>
+						onClick={THIS.ft_del_task.bind(THIS, uniqid)}>
 						<i className="checkmark icon"></i> Done
 					</div>
 				);
@@ -113,15 +113,15 @@ export default class Todo_content extends React.Component
 		function	ft_content_type(type)
 		{
 			if (type == "video")
-				return (<ReactPlayer url={description} controls width="260px" height="140px"/>);
+				return (<ReactPlayer url={descrip} controls width="260px" height="140px"/>);
 			else if (type == "picture")
-				return (<a href={description}><img src={description} width="260px" height="140px"/></a>);
+				return (<a href={descrip}><img src={descrip} width="260px" height="140px"/></a>);
 			else
-				return (<div className="description custom_descrip">{description}</div>);
+				return (<div className="description custom_descrip">{descrip}</div>);
 		}
 
 		return (
-			<div className="ui card fade-in segment" key={uniqueid}>
+			<div className="ui card fade-in segment" key={uniqid}>
 				<div className="content card_header">
 					<div className="right floated right_data">
 						<div className="meta">{timeSince(date)}</div>
@@ -135,7 +135,7 @@ export default class Todo_content extends React.Component
 				<div className="content card_content">
 					{ft_content_type(type)}
 				</div>
-				{ft_done_button(locked, username, uniqueid, THIS)}
+				{ft_done_button(locked, username, uniqid, THIS)}
 			</div>
 		);
 	}

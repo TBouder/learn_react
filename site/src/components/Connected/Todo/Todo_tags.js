@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/16 19:36:05 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 23:01:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ export default class Todo_tags extends React.Component
 		});
 	}
 
+	/**	FT_CHANGE_USER_TAG *****************************************************
+	**	The ft_change_user_tag() function gets the content of the tag form and,
+	**	according to its content and the DB content, will suggest 1 to 3 already
+	**	used tags
+	***************************************************************************/
 	ft_change_user_tag(event)
 	{
 		var		tag_labels = [];
@@ -94,11 +99,17 @@ export default class Todo_tags extends React.Component
 		this.setState({user_tag: event.target.value});
 	}
 
-	ft_select_user_tag(value)
-	{
-		this.setState({user_tag: value});
-	}
+	/**	FT_SELECT_USER_TAG *****************************************************
+	**	The ft_select_user_tag() function sets the value of the tag selected by
+	**	the user (by clicking the button) as the user_tag value
+	***************************************************************************/
+	ft_select_user_tag(value)	{this.setState({user_tag: value});}
 
+	/**	GETDATA ***************************************************************
+	**	The getData() function returns the tag asked by the user to the mother
+	**	function. If the tag already exists in the database, it will increment
+	**	its count by one. If not, it will create a new tag in the DB.
+	***************************************************************************/
 	getData()
 	{
 		let		tag = this.state.user_tag;
@@ -118,8 +129,8 @@ export default class Todo_tags extends React.Component
 				firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count + 1});
 			}
 		});
-			if (match == 0)
-				firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
+		if (match == 0)
+			firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
 		return (tag);
 	}
 
