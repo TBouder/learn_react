@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:19:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 19:36:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ export default class Todo_tags extends React.Component
 
 		this.state =
 		{
-			tag_list: [],
 			tag_list_raw: [],
 			tag_list_up: [],
 			tag_labels: [],
@@ -39,6 +38,10 @@ export default class Todo_tags extends React.Component
 		this.ft_load_tag_list();
 	}
 
+	/**	FT_LOAD_TAG_LIST *******************************************************
+	**	The ft_load_tag_list() function loads all the tags from the database and
+	**	save them in the tag_list_raw array (when a tag is added or removed).
+	***************************************************************************/
 	ft_load_tag_list()
 	{
 		var		THIS = this;
@@ -48,29 +51,18 @@ export default class Todo_tags extends React.Component
 		firebase.database().ref("todo_tags").on("child_added", function (snapshot)
 		{
 			let		tag = snapshot.val().tag;
-			let		key = snapshot.key;
 
-			THIS.state.tag_list.unshift(<option value={tag} key={key}>{tag}</option>);
 			THIS.state.tag_list_raw.unshift(tag);
 			THIS.setState({tmp: THIS.state.tmp + 1});
 		});
 
-		// firebase.database().ref("todo_tags").on("child_added", function (snapshot)
-		// {
-		// 	let		first = 0;
-		// 	let		tag = snapshot.val().tag;
-		// 	let		key = snapshot.key;
-		//
-		// 	if (first == 0)
-		// 	{
-		// 		THIS.tag_list_raw({tag_list_raw: []});
-		// 		first = 1;
-		// 	}
-		//
-		// 	THIS.state.tag_list.unshift(<option value={tag} key={key}>{tag}</option>);
-		// 	THIS.state.tag_list_raw.unshift(tag);
-		// 	THIS.setState({tmp: THIS.state.tmp + 1});
-		// });
+		firebase.database().ref("todo_tags").on("child_removed", function (snapshot)
+		{
+			let		tag = snapshot.val().tag;
+
+			var index = THIS.state.tag_list_raw.indexOf(tag);
+			if (index > -1) {THIS.state.tag_list_raw.splice(index, 1);}
+		});
 	}
 
 	ft_change_user_tag(event)
@@ -106,32 +98,6 @@ export default class Todo_tags extends React.Component
 	{
 		this.setState({user_tag: value});
 	}
-
-	// getData()
-	// {
-	// 	let		tag = this.state.user_tag;
-	// 	var		match = 2;
-	//
-	// 	this.setState({user_tag: "", tag_labels: ""});
-	//
-	// 	firebase.database().ref("todo_tags").on("child_added", function(snapshot)
-	// 	{
-	// 		let		val_key = snapshot.key;
-	// 		let		val_tag = snapshot.val().tag;
-	// 		let		val_count = snapshot.val().count;
-	//
-	// 		if (val_tag == tag)
-	// 		{
-	// 			match = 1;
-	// 			console.log("MATCH : " + val_count);
-	// 			console.log(val_tag + " vs "+ tag);
-	// 			firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count + 1});
-	// 		}
-	// 	});
-	// 	if (match == 0)
-	// 		firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
-	// 	return (tag);
-	// }
 
 	getData()
 	{
