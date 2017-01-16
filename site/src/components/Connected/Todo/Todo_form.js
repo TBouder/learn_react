@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 10:54:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 19:55:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ export default class Todo_form extends React.Component
 
 	ft_change_tag_value(event)
 	{
-		this.setState({tag_value: event.target.value});
+		if (event.target.value.length > 10)
+			this.setState({tag_value: event.target.value.substring(0, 10)});
+		else
+			this.setState({tag_value: event.target.value});
 	}
 
 	ft_change_lock_bool(event)
