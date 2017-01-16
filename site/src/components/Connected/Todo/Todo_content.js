@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/28 23:48:58 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 19:05:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ export default class Todo_content extends React.Component
 	constructor(props)
 	{
 		super(props);
-		var 		THIS = this;
+		var	THIS = this;
 
 		this.state =
 		{
@@ -37,8 +37,11 @@ export default class Todo_content extends React.Component
 		this.ft_unload();
 	}
 
-	/*************************************************************************/
-	/*This function loads the database on the page and create a new card*/
+	/**	FT_LOAD ****************************************************************
+	**	The ft_add_card() function loads the database on the page and/or create
+	**	a new card when asked.
+	**	It will call the ft_add_card() function.
+	***************************************************************************/
 	ft_load()
 	{
 		var 		THIS = this;
@@ -58,6 +61,9 @@ export default class Todo_content extends React.Component
 		});
 	}
 
+	/**	FT_ADD_CARD ************************************************************
+	**	The ft_add_card() function add a card on the page with all the data.
+	***************************************************************************/
 	ft_add_card(THIS, uniqueid, description, date, tag, type, username, image, locked)
 	{
 		function	timeSince(date)
@@ -78,7 +84,7 @@ export default class Todo_content extends React.Component
 			return (Math.floor(seconds) + " seconds ago");
 		}
 
-		function	doneButton(locked, username, uniqueid, THIS)
+		function	ft_done_button(locked, username, uniqueid, THIS)
 		{
 			let		ret;
 
@@ -104,15 +110,22 @@ export default class Todo_content extends React.Component
 			return (ret);
 		}
 
-		var			new_date = timeSince(date);
-		var			done_button = doneButton(locked, username, uniqueid,THIS);
+		function	ft_content_type(type)
+		{
+			if (type == "video")
+				return (<ReactPlayer url={description} controls width="260px" height="140px"/>);
+			else if (type == "picture")
+				return (<a href={description}><img src={description} width="260px" height="140px"/></a>);
+			else
+				return (<div className="description custom_descrip">{description}</div>);
+		}
 
 		return (
 			<div className="ui card fade-in segment" key={uniqueid}>
 				<div className="content card_header">
 					<div className="right floated right_data">
-						<div className="meta">{new_date}</div>
-						<div className="meta">#{tag}</div>
+						<div className="meta">{timeSince(date)}</div>
+						<div className="meta">{tag != "" ? "#" + tag : ""}</div>
 					</div>
 					<div className="left floated">
 						<img className="ui avatar image" src={image}/> {username}
@@ -120,54 +133,54 @@ export default class Todo_content extends React.Component
 			    </div>
 
 				<div className="content card_content">
-					{
-						type == "video"
-						?
-						<ReactPlayer url={description} controls width="260px" height="140px"/>
-						:
-						type == "picture"
-						?
-						<a href={description}><img src={description} width="260px" height="140px"/></a>
-						:
-						<div className="description custom_descrip">{description}</div>
-					}
+					{ft_content_type(type)}
 				</div>
-				{done_button}
+				{ft_done_button(locked, username, uniqueid, THIS)}
 			</div>
 		);
 	}
-	/*************************************************************************/
 
-	/*************************************************************************/
-	/*Unload data from firebase (so delete it), and delete the card from the
-	current page*/
+	/**	FT_UNLOAD **************************************************************
+	**	The ft_unload() function unload a data fron the db and decrement the
+	**	count value of the tag used by 1. If this value was 1, this function
+	**	remove the tag from the databas.
+	***************************************************************************/
 	ft_unload()
 	{
 		var THIS = this;
 		firebase.database().ref("todo_list").on("child_removed", function (snapshot)
 		{
 			var		tag = snapshot.val().tag;
+
 			THIS.ft_del_task(snapshot.key);
 			THIS.setState({tmp: THIS.state.tmp - 1});
-
-			firebase.database().ref("todo_tags").on("value", function(snapshot)
+			firebase.database().ref("todo_tags").once("value", function(snapshot)
 			{
-				let		val_key = snapshot.key;
-				let		val_tag = snapshot.val().tag;
-				let		val_count = snapshot.val().count;
-
-				if (val_tag == tag)
+				snapshot.forEach(function(sub_snapshot)
 				{
-					if (val_count == 1)
-						firebase.database().ref('/todo_tags/').child(val_key).remove();
-					else
-						firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count - 1});
-				}
+
+					if (sub_snapshot.val()['tag'] == tag)
+					{
+						let		val_key = sub_snapshot.key;
+						let		val_tag = sub_snapshot.val().tag;
+						let		val_count = sub_snapshot.val().count;
+
+						if (val_count == 1)
+							firebase.database().ref('/todo_tags/' + val_key + '/').remove();
+						else
+							firebase.database().ref('/todo_tags/' + val_key + '/').update({'count': val_count - 1});
+					}
+				})
 			});
 
 		});
 	}
 
+	/**	FT_DEL_TASK ************************************************************
+	**	The ft_del_task() function removes the card (according to it's id), from
+	**	the frontpage and from the todo_array array.
+	**	By this action, thanks to firebase, ft_unload() is call
+	***************************************************************************/
 	ft_del_task(id)
 	{
 		var len = this.state.todo_array.length;
@@ -185,8 +198,9 @@ export default class Todo_content extends React.Component
 		firebase.database().ref("todo_list/" + id).remove();
 	}
 
-	/*************************************************************************/
-
+	/**	RENDER *****************************************************************
+	**	The render() function renders it's content on the page.
+	***************************************************************************/
 	render()
 	{
 		return (
