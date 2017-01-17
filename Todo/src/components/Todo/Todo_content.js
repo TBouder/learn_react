@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/17 09:58:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/17 20:53:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,39 @@ export default class Todo_content extends React.Component
 	constructor(props)
 	{
 		super(props);
-		var	THIS = this;
 
 		this.state =
 		{
-			login: "",
+			user: "",
 			todo_array: [],
 			tmp: 0
 		};
 		if (this.props.user)
-			this.setState({login: this.props.user.displayName});
+			this.setState({user: this.props.user.displayName});
 
 		this.ft_del_task = this.ft_del_task.bind(this);
 		this.ft_load = this.ft_load.bind(this);
 		this.ft_unload = this.ft_unload.bind(this);
+		this.ft_reload_on_user_change = this.ft_reload_on_user_change.bind(this);
 
 		this.ft_load();
 		this.ft_unload();
+		this.ft_reload_on_user_change();
+	}
+
+	/**	FT_RELOAD_ON_USER_CHANGE ***********************************************
+	**	The ft_reload_on_user_change() function reloads the card when the user
+	**	get disconnected.
+	***************************************************************************/
+	ft_reload_on_user_change()
+	{
+		var THIS = this;
+		firebase.auth().onAuthStateChanged(function(user)
+		{
+			THIS.setState({user: user});
+			THIS.setState({todo_array: []});
+			THIS.ft_load();
+		});
 	}
 
 	/**	FT_LOAD ****************************************************************
@@ -72,22 +88,22 @@ export default class Todo_content extends React.Component
 		{
 			let		ret;
 
-			if ((locked && username == THIS.state.login) || !locked)
+			if (!THIS.state.user || locked)
+			{
+				ret =
+				(
+					<div className="ui bottom attached button red">
+						<i className="remove icon"></i> Locked
+					</div>
+				);
+			}
+			else if ((locked && THIS.state.user && username == THIS.state.user.displayName) || !locked)
 			{
 				ret =
 				(
 					<div className="ui bottom attached button green"
 						onClick={THIS.ft_del_task.bind(THIS, uniqid)}>
 						<i className="checkmark icon"></i> Done
-					</div>
-				);
-			}
-			else if (locked)
-			{
-				ret =
-				(
-					<div className="ui bottom attached button red">
-						<i className="remove icon"></i> Locked
 					</div>
 				);
 			}

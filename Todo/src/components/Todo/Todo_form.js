@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/17 18:13:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/17 18:46:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ export default class Todo_form extends React.Component
 
 		this.state =
 		{
-			login: "",
-			image: "",
 			todo: 0,
 			value: "",
 			tag_value: "",
@@ -36,10 +34,6 @@ export default class Todo_form extends React.Component
 			status: ""
 		};
 
-		if (this.props.user)
-		{
-			this.setState({login: this.props.user.displayName, image: this.props.user.photoURL});
-		}
 		this.ft_add_task = this.ft_add_task.bind(this);
 		this.ft_count_todo = this.ft_count_todo.bind(this);
 		this.ft_change_value = this.ft_change_value.bind(this);

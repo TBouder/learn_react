@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/17 18:11:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/17 20:56:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ export default class Login_page extends React.Component
 		db.ref("/users/" + username).on("value", function(snapshot)
 		{
 			var new_user = snapshot.val()
+			
 			if (new_user)
 			{
 				auth.signInWithEmailAndPassword(new_user.email, THIS.state.passwd).then(function(user)
