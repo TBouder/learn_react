@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/12 22:48:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/17 21:04:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,10 @@
 
 @media screen and (max-width: 767px)
 {
-	.navbar .menu h2 { font-size: 1.2rem !important; top: -2vh !important}
+	.navbar .menu h2 { font-size: 1.2rem !important; top: -3vh !important}
 	.navbar .menu .cart { top: -2vh !important; right: -3vw !important;}
 
-	.navbar_menu { margin-top: 7vh !important;}
+	.navbar_menu { margin-top: 11.5vh !important;}
 	.navbar_menu_item h3 { font-size: 2rem !important}
-	.navbar { height: 9rem !important}
+	.navbar { height: 10rem !important}
 }
