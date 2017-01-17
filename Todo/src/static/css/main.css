@@ -1,0 +1,215 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.css                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
+/*   Updated: 2017/01/17 10:30:26 by tbouder          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+.center
+{
+	text-align: center;
+}
+
+.padding_two
+{
+	padding-top: 2vh;
+}
+
+.padding_five
+{
+	padding-top: 5vh;
+}
+
+.padding_ten
+{
+	padding-top: 10vh;
+}
+
+.page_center
+{
+	margin: auto 0;
+}
+
+.user_img
+{
+	padding: 2vh 2vw;
+	border-radius: 50% !important;
+}
+
+.not_display
+{
+	display: none !important;
+}
+
+.full_width
+{
+	width: 100% !important;
+	border-radius: 0 !important;
+}
+
+.half_height
+{
+	height: 50% !important;
+}
+
+.label_main
+{
+	margin-bottom: 10%;
+}
+
+.label_left
+{
+	position: absolute !important;
+	width: 40% !important;
+	left: 5px !important;
+}
+
+.label_right
+{
+	position: absolute !important;
+	width: 40% !important;
+	right: 5px !important;
+}
+
+.right_data
+{
+	margin-top: -3%;
+}
+
+.hello_title
+{
+	font-size: 1rem !important;
+}
+
+.custom_descrip
+{
+	word-wrap: break-word !important;
+}
+
+.button
+{
+	margin-bottom: -0.5px !important;
+}
+.login_button:hover
+{
+	background-color: #21BA45 !important;
+}
+
+.ui.cards
+{
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.ui.cards > .card > .content,
+.ui.card > .content
+{
+  border-top: none !important;
+}
+
+.card_header
+{
+	border-bottom: 1px solid rgba(34, 36, 38, 0.1) !important;
+}
+.card_content
+{
+	min-height: 12%;
+}
+
+.ui.input input::-webkit-input-placeholder {
+  color: rgba(140, 140, 140, 0.87);
+}
+
+.ui.input input::-moz-placeholder {
+  color: rgba(140, 140, 140, 0.87);
+}
+
+.ui.input input:-ms-input-placeholder {
+  color: rgba(140, 140, 140, 0.87);
+}
+
+
+/* Animation */
+@-webkit-keyframes fadeIn	{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@-moz-keyframes fadeIn		{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@keyframes fadeIn			{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+
+.fade-in {
+	opacity:0;  /* make things invisible upon start */
+	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+
+	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+
+	-webkit-animation-duration:1s;
+	-moz-animation-duration:1s;
+	animation-duration:1s;
+
+	-webkit-animation-delay: 0s;
+	-moz-animation-delay: 0s;
+	animation-delay: 0s;
+}
+
+/*******************************************************************************
+** NAVBAR
+*******************************************************************************/
+.navbar
+{
+	height: 6rem !important;
+	width: 100vw !important;
+	min-width: 100% !important;
+	background-color: #1E2B2F !important;
+	border-radius: 0 !important;
+	margin-bottom: 5rem;
+}
+
+.navbar_menu
+{
+	position: absolute;
+	left: 20%;
+	width: 62.5% !important;
+	justify-content: center !important;
+	margin-top: 0.55em !important;
+
+}
+
+.navbar_menu_item h3
+{
+	color: #FFFFFF !important;
+	font-size: 1.7rem !important;
+}
+
+.navbar_right
+{
+	margin-right: 1vw;
+}
+
+.navbar_cart_icon:hover
+{
+	color: #3890D4 !important;
+}
+
+@media screen and (max-width: 767px)
+{
+	.navbar .menu h2 { font-size: 1.2rem !important; top: -2vh !important}
+	.navbar .menu .cart { top: -2vh !important; right: -3vw !important;}
+
+	.navbar_menu { margin-top: 7vh !important;}
+	.navbar_menu_item h3 { font-size: 2rem !important}
+	.navbar { height: 9rem !important}
+}
+
+.ui.negative.message
+{
+	max-width: 80% !important;
+	margin: 0 auto !important;
+	margin-bottom: 2vh !important;
+}
