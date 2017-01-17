@@ -1,19 +1,15 @@
-./node_modules/.bin/webpack
+# Todo list : React & NodeJs & Firebase  
 
-
-# Minimal Website : React and NodeJs
-
-![Illustration](http://img4.hostingpics.net/pics/638887ScreenShot20161006at13956PM.png)  
+![Illustration](http://img15.hostingpics.net/pics/142467Capturedecran20170117a182733.png)  
 
 ###Why  
->I started to work with react, just to learn something new, and I told myself I will try a new kind of backend with NodeJs.  
-And the both, together, are really not easy to use. Consequently, I searched the minimum code required to make it work.   
+>Simple todo-list with a NodeJs server, a lot of ReactJs (server side), and a little bit of Firebase magic !   
 
 ###Requirements :  
 - NodeJs  
 - All the packages in the package.json file  
 
 ###Installation :  
-1. git clone https://github.com/TBouder/minimal_website  
+1. git clone https://github.com/TBouder/learn_react  
 2. npm install  
 3. ./start.sh  
