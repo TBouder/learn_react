@@ -1,57 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Index.js                                           :+:      :+:    :+:   */
+/*   Page_not_found.js                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 00:40:55 by tbouder          ###   ########.fr       */
+/*   Created: 2016/10/03 22:44:40 by tbouder           #+#    #+#             */
+/*   Updated: 2016/10/16 14:50:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React	from 'react';
 import {Link}	from 'react-router';
 
-export default class Index extends React.Component
+export default class Page_not_found extends React.Component
 {
 	render()
 	{
 		return (
 			<div>
-<<<<<<< HEAD
-				<div className="text_center padding_two">
-					<h1>Hello, world!</h1>
-				</div>
-
-				<div className="text_center padding_two">
-=======
 				<div className="center padding_two">
-					<h1>Hello, world!</h1>
+					<h1> 404 </h1>
+					<h2>Page not found!</h2>
 				</div>
 
 				<div className="center padding_two">
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
+					<Link to = "/">
+						<button className="ui labeled icon button">
+							<i className="hand spock icon"></i>
+							Let's go to the Home page
+						</button>
+					</Link>
 					<Link to = "/count">
 						<button className="ui labeled icon button">
 							<i className="plus icon"></i>
 							Let's go to the counter page
 						</button>
 					</Link>
-					<Link to = "/NOTRANDOMLOL">
-						<button className="ui labeled icon button">
-							<i className="remove icon"></i>
-							Let's go to an error 404 page
-						</button>
-					</Link>
-					<Link to = "/todo">
-						<button className="ui labeled icon button">
-							<i className="Checked Calendar icon"></i>
-							Let's go the todo list
-						</button>
-					</Link>
 				</div>
-
 			</div>
 		);
 	}

@@ -6,11 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/12/13 12:19:59 by tbouder          ###   ########.fr       */
-=======
 /*   Updated: 2017/01/16 23:01:01 by tbouder          ###   ########.fr       */
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +24,6 @@ export default class Todo_tags extends React.Component
 
 		this.state =
 		{
-<<<<<<< HEAD
-			tag_list: [],
-=======
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 			tag_list_raw: [],
 			tag_list_up: [],
 			tag_labels: [],
@@ -46,13 +38,10 @@ export default class Todo_tags extends React.Component
 		this.ft_load_tag_list();
 	}
 
-<<<<<<< HEAD
-=======
 	/**	FT_LOAD_TAG_LIST *******************************************************
 	**	The ft_load_tag_list() function loads all the tags from the database and
 	**	save them in the tag_list_raw array (when a tag is added or removed).
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	ft_load_tag_list()
 	{
 		var		THIS = this;
@@ -62,37 +51,11 @@ export default class Todo_tags extends React.Component
 		firebase.database().ref("todo_tags").on("child_added", function (snapshot)
 		{
 			let		tag = snapshot.val().tag;
-<<<<<<< HEAD
-			let		key = snapshot.key;
 
-			THIS.state.tag_list.unshift(<option value={tag} key={key}>{tag}</option>);
-=======
-
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 			THIS.state.tag_list_raw.unshift(tag);
 			THIS.setState({tmp: THIS.state.tmp + 1});
 		});
 
-<<<<<<< HEAD
-		// firebase.database().ref("todo_tags").on("child_added", function (snapshot)
-		// {
-		// 	let		first = 0;
-		// 	let		tag = snapshot.val().tag;
-		// 	let		key = snapshot.key;
-		//
-		// 	if (first == 0)
-		// 	{
-		// 		THIS.tag_list_raw({tag_list_raw: []});
-		// 		first = 1;
-		// 	}
-		//
-		// 	THIS.state.tag_list.unshift(<option value={tag} key={key}>{tag}</option>);
-		// 	THIS.state.tag_list_raw.unshift(tag);
-		// 	THIS.setState({tmp: THIS.state.tmp + 1});
-		// });
-	}
-
-=======
 		firebase.database().ref("todo_tags").on("child_removed", function (snapshot)
 		{
 			let		tag = snapshot.val().tag;
@@ -107,7 +70,6 @@ export default class Todo_tags extends React.Component
 	**	according to its content and the DB content, will suggest 1 to 3 already
 	**	used tags
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	ft_change_user_tag(event)
 	{
 		var		tag_labels = [];
@@ -137,39 +99,6 @@ export default class Todo_tags extends React.Component
 		this.setState({user_tag: event.target.value});
 	}
 
-<<<<<<< HEAD
-	ft_select_user_tag(value)
-	{
-		this.setState({user_tag: value});
-	}
-
-	// getData()
-	// {
-	// 	let		tag = this.state.user_tag;
-	// 	var		match = 2;
-	//
-	// 	this.setState({user_tag: "", tag_labels: ""});
-	//
-	// 	firebase.database().ref("todo_tags").on("child_added", function(snapshot)
-	// 	{
-	// 		let		val_key = snapshot.key;
-	// 		let		val_tag = snapshot.val().tag;
-	// 		let		val_count = snapshot.val().count;
-	//
-	// 		if (val_tag == tag)
-	// 		{
-	// 			match = 1;
-	// 			console.log("MATCH : " + val_count);
-	// 			console.log(val_tag + " vs "+ tag);
-	// 			firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count + 1});
-	// 		}
-	// 	});
-	// 	if (match == 0)
-	// 		firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
-	// 	return (tag);
-	// }
-
-=======
 	/**	FT_SELECT_USER_TAG *****************************************************
 	**	The ft_select_user_tag() function sets the value of the tag selected by
 	**	the user (by clicking the button) as the user_tag value
@@ -181,7 +110,6 @@ export default class Todo_tags extends React.Component
 	**	function. If the tag already exists in the database, it will increment
 	**	its count by one. If not, it will create a new tag in the DB.
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	getData()
 	{
 		let		tag = this.state.user_tag;
@@ -201,13 +129,8 @@ export default class Todo_tags extends React.Component
 				firebase.database().ref('/todo_tags/').child(val_key).update({'count': val_count + 1});
 			}
 		});
-<<<<<<< HEAD
-			if (match == 0)
-				firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
-=======
 		if (match == 0)
 			firebase.database().ref('/todo_tags/').push().set({tag: tag, 'count': 0});
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 		return (tag);
 	}
 

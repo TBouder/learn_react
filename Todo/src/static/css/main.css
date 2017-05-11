@@ -6,19 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:36:15 by tbouder           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/12/28 23:56:18 by tbouder          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-.text_center
-=======
-/*   Updated: 2017/01/17 21:04:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/17 20:49:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 .center
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 {
 	text-align: center;
 }
@@ -94,15 +86,6 @@
 	font-size: 1rem !important;
 }
 
-<<<<<<< HEAD
-.navbar_menu
-{
-	justify-content: center !important;
-	margin-top: -0.5em !important;
-}
-
-=======
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 .custom_descrip
 {
 	word-wrap: break-word !important;
@@ -157,25 +140,23 @@
 @keyframes fadeIn			{ from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
 
 .fade-in {
-	opacity:0;  /* make things invisible upon start */
-	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	opacity:0;
+	-webkit-animation:fadeIn ease-in 1;
 	-moz-animation:fadeIn ease-in 1;
 	animation:fadeIn ease-in 1;
 
-	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-webkit-animation-fill-mode:forwards;
 	-moz-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
 
-	-webkit-animation-duration:1s;
-	-moz-animation-duration:1s;
-	animation-duration:1s;
+	-webkit-animation-duration:0.5s;
+	-moz-animation-duration:0.5s;
+	animation-duration:0.5s;
 
 	-webkit-animation-delay: 0s;
 	-moz-animation-delay: 0s;
 	animation-delay: 0s;
 }
-<<<<<<< HEAD
-=======
 
 /*******************************************************************************
 ** NAVBAR
@@ -218,11 +199,17 @@
 
 @media screen and (max-width: 767px)
 {
-	.navbar .menu h2 { font-size: 1.2rem !important; top: -3vh !important}
+	.navbar .menu h2 { font-size: 1.2rem !important; top: -2vh !important}
 	.navbar .menu .cart { top: -2vh !important; right: -3vw !important;}
 
-	.navbar_menu { margin-top: 11.5vh !important;}
+	.navbar_menu { margin-top: 7vh !important;}
 	.navbar_menu_item h3 { font-size: 2rem !important}
-	.navbar { height: 10rem !important}
+	.navbar { height: 9rem !important}
 }
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
+
+.ui.negative.message
+{
+	max-width: 80% !important;
+	margin: 0 auto !important;
+	margin-bottom: 2vh !important;
+}

@@ -6,11 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:53:03 by tbouder           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/12/13 10:54:46 by tbouder          ###   ########.fr       */
-=======
-/*   Updated: 2017/01/16 23:45:28 by tbouder          ###   ########.fr       */
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
+/*   Updated: 2017/01/17 18:46:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +25,13 @@ export default class Todo_form extends React.Component
 
 		this.state =
 		{
-			login: this.props.user.displayName,
-			image: this.props.user.photoURL,
 			todo: 0,
 			value: "",
 			tag_value: "",
 			lock_bool: 0,
 			video_bool: 0,
-			picture_bool: 0
+			picture_bool: 0,
+			status: ""
 		};
 
 		this.ft_add_task = this.ft_add_task.bind(this);
@@ -50,17 +45,10 @@ export default class Todo_form extends React.Component
 		this.ft_count_todo();
 	}
 
-<<<<<<< HEAD
-	/*
-	**	The ft_count_todo() function loads the database and counts the number of
-	**	todo to put in this.state.todo
-	*/
-=======
 	/**	FT_COUNT_TODO **********************************************************
 	**	The ft_count_todo() function loads the database and counts the number of
 	**	todo to put in this.state.todo
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	ft_count_todo()
 	{
 		var THIS = this;
@@ -70,25 +58,18 @@ export default class Todo_form extends React.Component
 		});
 	}
 
-<<<<<<< HEAD
-	/*
-	**	The ft_add_task() function takes no parameters and add a task in the
-	**	database, then, re-set to null all the user inputs
-	*/
-=======
 	/**	FT_ADD_TASK ************************************************************
 	**	The ft_add_task() function takes no parameters and add a task in the
 	**	database, then, re-set to null all the user inputs
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	ft_add_task()
 	{
-		if (this.state.value != "")
+		if (this.state.value != "" && this.props.user && this.props.user.displayName != "")
 		{
 			let		date = Date.now();
 			let		tag = this.refs.tags.getData();
 			let		login = this.props.user.displayName;
-			let		image = this.state.image;
+			let		image = this.props.user.photoURL;
 			let		is_locked = this.state.lock_bool;
 			let		media = this.state.video_bool == 1 ? "video" : "text";
 					media = this.state.picture_bool == 1 ? "picture" : media;
@@ -104,39 +85,40 @@ export default class Todo_form extends React.Component
 				locked: is_locked
 			});
 			this.setState({todo: this.state.todo + 1});
-			this.setState({value: "", tag_value: "", type_value: "",
-				lock_bool: 0, video_bool: 0, picture_bool: 0});
 		}
+		else if (!this.props.user)
+		{
+			function ft_create_error_message(code, message)
+			{
+				return (
+					<div className="ui negative message">
+						<div className="header">
+							{code}
+						</div>
+						<p>{message}</p>
+					</div>
+				)
+			}
+			this.setState({status: ft_create_error_message("No_account/42", "You must be connected to add a todo")});
+		}
+		this.setState({value: "", tag_value: "", type_value: "",
+			lock_bool: 0, video_bool: 0, picture_bool: 0});
 	}
 
-<<<<<<< HEAD
-	/*
-	**	The ft_add_task_enter() function detects when the user press enter and
-	**	launch the above function (ft_add_task)
-	*/
-=======
 	/**	FT_ADD_TASK_ENTER ******************************************************
 	**	The ft_add_task_enter() function detects when the user press enter and
 	**	launch the above function (ft_add_task)
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	ft_add_task_enter(e)
 	{
 		if (e.charCode == 13 || e.keyCode == 13)
 			{this.ft_add_task()};
 	}
 
-<<<<<<< HEAD
-	/*
-	**	Theses ft_change_XXX() functions change the value of the corresponding
-	**	state to get the user input
-	*/
-=======
 	/**	FT_CHANGE_XXX **********************************************************
 	**	Theses ft_change_XXX() functions change the value of the corresponding
 	**	state to get the user input
 	***************************************************************************/
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	ft_change_value(event)
 	{
 		if (event.target.value.length > 140)
@@ -147,14 +129,10 @@ export default class Todo_form extends React.Component
 
 	ft_change_tag_value(event)
 	{
-<<<<<<< HEAD
-		this.setState({tag_value: event.target.value});
-=======
 		if (event.target.value.length > 10)
 			this.setState({tag_value: event.target.value.substring(0, 10)});
 		else
 			this.setState({tag_value: event.target.value});
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 	}
 
 	ft_change_lock_bool(event)
@@ -186,19 +164,12 @@ export default class Todo_form extends React.Component
 		else
 			this.setState({picture_bool: 0});
 	}
-<<<<<<< HEAD
-	/*************************************************************************/
-=======
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 
 	render()
 	{
 		return (
-<<<<<<< HEAD
-			<div className="text_center padding_five page_center">
-=======
 			<div className="center padding_five page_center">
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
+				{this.state.status}
 				<div className="ui cards centered">
 					<div className="card">
 						<div className="content">

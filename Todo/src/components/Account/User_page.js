@@ -74,11 +74,7 @@ export default class User_page extends React.Component
 	{
 		return (
 			<div key="1">
-<<<<<<< HEAD
-				<div className="text_center padding_five page_center">
-=======
 				<div className="center padding_five page_center">
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 					<div className="ui cards centered">
 						<div className={this.state.email_verif ? "ui green card" : "ui red card"}>
 							<div className="image">

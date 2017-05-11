@@ -32,14 +32,22 @@ export default class Count extends React.Component
 	{
 		return (
 			<div>
+<<<<<<< HEAD
 				<div className="text_center padding_two">
+=======
+				<div className="center padding_two">
+>>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 					<button className="ui green button" onClick={this.increment_count}>++ count</button>
 					<button className="ui red button" onClick={this.decrement_count}>-- count</button>
 					<button className="ui yellow button" onClick={this.reset_count}>Reset count</button>
 					<h1>COUNT : {this.state.count}</h1>
 				</div>
 
+<<<<<<< HEAD
 				<div className="text_center padding_two">
+=======
+				<div className="center padding_two">
+>>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
 					<Link to = "/">
 						<button className="ui labeled icon button">
 							<i className="hand spock icon"></i>

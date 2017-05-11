@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Is_connected.js                                    :+:      :+:    :+:   */
+/*   Is_not_connected.js                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 22:48:14 by tbouder           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/11/28 01:54:19 by tbouder          ###   ########.fr       */
-=======
-/*   Updated: 2017/01/17 21:03:04 by tbouder          ###   ########.fr       */
->>>>>>> bf05bd54967456e769e24f44b8df1bb09a4b97f6
+/*   Updated: 2017/01/12 22:40:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +15,27 @@ import {Link}				from 'react-router';
 import Firebase				from 'firebase';
 import {Route, IndexRoute}	from 'react-router'
 
-export default class Is_connected extends React.Component
+export default class Is_not_connected extends React.Component
 {
 	constructor(props)
 	{
 		super(props);
-		this.state = {currentUser: this.props.user, logged_in: 1};
-		this.ft_logout = this.ft_logout.bind(this);
-	}
-
-	ft_logout()
-	{
-		var THIS = this;
-		firebase.auth().signOut().then(function()
-		{
-			THIS.setState({logged_in: 0});
-			THIS.setState({currentUser: null});
-		});
 	}
 
 	render()
 	{
 		return (
 			<div className="right menu">
-				<Link to="/account">
+				<Link to={{pathname: "/account", query: {page: "sign_up" }}}>
 					<button className="ui icon teal button">
-						<h5>Account</h5>
+						<h5>Sign Up</h5>
 					</button>
 				</Link>
-				<button className="ui icon red button" onClick={this.ft_logout}>
-					<h5><i className="icon power"></i></h5>
-				</button>
+				<Link to="/account">
+					<button className="ui icon green button">
+						<h5>Sign In</h5>
+					</button>
+				</Link>
 			</div>
 		);
 	}
